@@ -35,9 +35,6 @@ Route::get('/project/{project_id}/messages', 'Api\MessageController@show');
 // パブリックメッセージの投稿
 Route::post('/message', 'Api\MessageController@store');
 
-// ログインユーザーのDMのスペース一覧を取得
-Route::get('/rooms', 'Api\RoomController@index');
-
 // DMのやりとりをするスペースを作成
 Route::post('/room/store', 'Api\RoomController@store');
 
