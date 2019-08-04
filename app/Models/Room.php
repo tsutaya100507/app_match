@@ -20,7 +20,7 @@ class Room extends Model
     }
 
     public function otherUser() {
-        $user_id = 1;
+        $user_id = Auth::id();
         \Log::info($user_id);
         $other_key = '';
         if ($user_id === $this->send_user_id) {
