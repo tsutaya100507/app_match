@@ -2,8 +2,15 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
+// Reset
+@import "./foundation/reset.scss";
+
+// Nomarize
+@import "./foundation/nomarize.scss";
+
 // Variables
-@import "variables";
+@import "./foundation/variables";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
