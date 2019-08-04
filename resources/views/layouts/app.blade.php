@@ -22,8 +22,9 @@
     <div id="app">
 
         @include('layouts/header')
-
-        @yield('content')
+        <div class="wrapper">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
