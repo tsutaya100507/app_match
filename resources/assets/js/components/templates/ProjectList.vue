@@ -1,13 +1,11 @@
 <template>
-  <section>
+  <section class="p-pjlist">
     <h1 v-on:click="getProjects">案件一覧</h1>
     <ul v-for="project in projects" :key="project.id">
-      <li>
-        <ProjectCard :project="project" />
-      </li>
+      <ProjectCard :project="project" />
     </ul> 
-    <a href="/project/create">
-      案件を投稿する
+    <a href="/project/create" class="p-pjlist__fixedlink">
+      案件投稿
     </a>
   </section>
 </template>

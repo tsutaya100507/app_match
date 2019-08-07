@@ -8172,9 +8172,84 @@ button.close {
   margin-top: 70px;
 }
 
+.c-pjcard {
+  padding: 1.2rem;
+  -webkit-box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.1);
+  -webkit-transition: -webkit-box-shadow 0.4s ease 0.2s;
+  transition: -webkit-box-shadow 0.4s ease 0.2s;
+  transition: box-shadow 0.4s ease 0.2s;
+  transition: box-shadow 0.4s ease 0.2s, -webkit-box-shadow 0.4s ease 0.2s;
+}
+
+.c-pjcard:hover {
+  -webkit-box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.c-pjcard a {
+  color: #4e4d4d;
+}
+
+.c-pjcard a h2 {
+  line-height: 1.4;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.c-pjcard a h2:hover {
+  color: black;
+}
+
+.c-pjcard a:hover {
+  text-decoration: none;
+  color: gray;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.c-pjcard__terms {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c-pjcard__note {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 30px;
+}
+
+.c-pjcard__note dt {
+  margin-right: 10px;
+}
+
 .welcome-header {
   min-height: 100vh;
   background-image: url("../../../images/welcome.jpg");
   background-size: cover;
   background-position: center;
+}
+
+.p-pjlist__fixedlink {
+  display: block;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  background-color: rgba(33, 110, 110, 0.9);
+  border-radius: 50%;
+  font-size: 22px;
+  color: #fff;
+  -webkit-box-shadow: 4px 4px 2px rgba(33, 110, 110, 0.4);
+          box-shadow: 4px 4px 2px rgba(33, 110, 110, 0.4);
+}
+
+.p-pjlist__fixedlink:hover {
+  text-decoration: none;
+  color: #fff;
 }

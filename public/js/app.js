@@ -1701,6 +1701,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProjectCard',
@@ -2120,8 +2126,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__ = __webpack_require__("./resources/assets/js/components/parts/ProjectCard.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__);
-//
-//
 //
 //
 //
@@ -33552,18 +33556,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { attrs: { href: "/project/" + _vm.project.id } }, [
-    _c("article", [
-      _vm._v("\n    " + _vm._s(_vm.project.id) + "\n    "),
-      _c("span", [_vm._v(_vm._s(_vm.project.title))]),
+  return _c("li", { staticClass: "c-pjcard" }, [
+    _c("a", { attrs: { href: "/project/" + _vm.project.id } }, [
+      _c("h2", { staticClass: "c-pjcard__title" }, [
+        _vm._v(_vm._s(_vm.project.title))
+      ])
+    ]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.project.description))]),
+    _vm._v(" "),
+    _c("div", { staticClass: "c-pjcard__terms" }, [
+      _c("dl", { staticClass: "c-pjcard__note" }, [
+        _c("dt", [_vm._v("案件タイプ")]),
+        _vm._v(" "),
+        _c("dd", [_vm._v(_vm._s(_vm.project.type))])
+      ]),
       _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.project.type))]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.project.description))]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.project.name))]),
-      _vm._v(" "),
-      _c("hr")
+      _c("dl", { staticClass: "c-pjcard__note" }, [
+        _c("dt", [_vm._v("投稿者")]),
+        _vm._v(" "),
+        _c("dd", [_vm._v(_vm._s(_vm.project.name))])
+      ])
     ])
   ])
 }
@@ -33663,18 +33676,27 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
+    { staticClass: "p-pjlist" },
     [
       _c("h1", { on: { click: _vm.getProjects } }, [_vm._v("案件一覧")]),
       _vm._v(" "),
       _vm._l(_vm.projects, function(project) {
-        return _c("ul", { key: project.id }, [
-          _c("li", [_c("ProjectCard", { attrs: { project: project } })], 1)
-        ])
+        return _c(
+          "ul",
+          { key: project.id },
+          [_c("ProjectCard", { attrs: { project: project } })],
+          1
+        )
       }),
       _vm._v(" "),
-      _c("a", { attrs: { href: "/project/create" } }, [
-        _vm._v("\n    案件を投稿する\n  ")
-      ])
+      _c(
+        "a",
+        {
+          staticClass: "p-pjlist__fixedlink",
+          attrs: { href: "/project/create" }
+        },
+        [_vm._v("\n    案件投稿\n  ")]
+      )
     ],
     2
   )

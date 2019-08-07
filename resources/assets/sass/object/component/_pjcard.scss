@@ -1,0 +1,40 @@
+.c-pjcard {
+  padding: 1.2rem;
+  box-shadow: 1px 1px 1px 2px rgba(0,0,0,0.1);
+  transition: box-shadow 0.4s ease 0.2s;
+  &:hover {
+    box-shadow: 1px 1px 1px 2px rgba(0,0,0,0.2);
+  }
+}
+
+.c-pjcard a {
+  color: rgb(78, 77, 77);
+  h2 {
+    line-height: 1.4;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  h2:hover {
+    color: rgb(0, 0, 0);
+  }
+}
+
+.c-pjcard a:hover {
+  text-decoration: none;
+  color: gray;
+  transform: scale(1.1);
+}
+
+.c-pjcard__terms {
+  display: flex;
+}
+
+.c-pjcard__note {
+  display: flex;
+  margin-right: 30px;
+  dt {
+    margin-right: 10px;
+  }
+}
+
+

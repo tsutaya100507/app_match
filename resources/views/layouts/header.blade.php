@@ -15,16 +15,18 @@
     @else
       <li>
         <a href="/profile" role="button">
-            {{ Auth::user()->name }} さんのマイページへ<span class="caret"></span>
+          マイページへ<span class="caret"></span>
         </a>
+        <li>
+          <a href="/project/create">案件投稿</a>
+        </li>
 
         <li>
           <a href="{{ route('logout') }}"
               onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-              Logout
+              ログアウト
           </a>
-
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               {{ csrf_field() }}
           </form>
