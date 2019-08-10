@@ -1,13 +1,26 @@
 <template>
   <section>
-    <h1>案件詳細</h1>
-    {{isRoom}}
-    <a :href="'/dmroom/' + room[0].id" v-if="isRoom">DMページへ</a>
-    <button v-on:click="createRoom" v-else>案件投稿者へのDMを送る</button>
-    <span v-if="wasApplied">申し込み済み</span>
-    <button v-on:click="doApply" v-else>申し込み</button>
-    <section>
-      <div>
+    <h1 class="p-pjdetail__title">{{ project.title }}</h1>
+    <dl class="p-pjdetail__note">
+      <dt>案件詳細</dt>
+      <dd><p>{{ project.description }}</p></dd>
+    </dl>
+    <div class="p-pjdetail__terms">
+        <dl class="p-pjdetail__note">
+          <dt>案件タイプ</dt>
+          <dd>{{project.type}}</dd>
+        </dl>
+        <dl class="p-pjdetail__note">
+          <dt>投稿者</dt>
+          <dd>{{project.name}}</dd>
+          <a :href="'/dmroom/' + room[0].id" v-if="isRoom">DMページへ</a>
+          <button v-on:click="createRoom" v-else>案件投稿者へのDMを送る</button>
+        </dl>
+      </div>
+    <span v-if="wasApplied" class="button button--info" disalbled>申し込み済み</span>
+    <button v-on:click="doApply" v-else class="button button--primary">申し込んでみる</button>
+    <section class="p-pjdetail__message__area">
+        <h2 class="p-pjdetail__message__title">メッセージ</h2>
         <ul v-for="message in messages" :key="message.id">
           <li>
             <MessageCard :message="message" />
@@ -15,9 +28,8 @@
         </ul>
         <form action="">
           <textarea name="" id="" cols="30" rows="3" v-model="formData.message"></textarea>
-          <button type="button" v-on:click="submitMessage">メッセージ投稿</button>
+          <button type="button" v-on:click="submitMessage">メッセージを送る</button>
         </form>
-      </div>
     </section>
   </section>
 </template>
@@ -64,6 +76,7 @@ export default {
         }
       })
     },
+    // 案件への申し込み
     doApply() {
       const url = "/api/application/store"
       axios.post(url, {
@@ -74,6 +87,7 @@ export default {
         this.wasApplied = true
       })
     },
+    // 案件に紐づくパブリックメッセージの取得
     getMessages() {
       const url = `/api/project/${this.project.id}/messages`
       console.log(url)
@@ -82,6 +96,7 @@ export default {
           this.messages = res.data
         })
     },
+    // パブリックメッセージを投稿
     submitMessage() {
       const url = "/api/message"
       axios.post(url, {

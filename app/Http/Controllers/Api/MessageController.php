@@ -28,7 +28,10 @@ class MessageController extends Controller
         $message->project_id = $request->project_id;
         $message->save();
 
-        $messages = Message::where('project_id', $message->project_id)->joins('users', 'messages.user_id', '=', 'users.id')->get();
+        $messages = Message::where('project_id', $message->project_id)
+                        ->join('users', 'messages.user_id', '=', 'users.id')
+                        ->select('messages.body', 'users.name')
+                        ->get();
         \Log::info($messages);
         return $messages;
     }

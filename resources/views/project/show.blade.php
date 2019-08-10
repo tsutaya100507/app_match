@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div id="app">
-      {{$room}}
+      {{-- {{$room}}
       {{$project[0]}}
-      {{$user}}
+      {{$user}} --}}
     <project-detail :project="{{$project[0]}}" :current_user="{{$user}}" :room="{{$room}}" />
     </div>
 </div>

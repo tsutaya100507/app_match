@@ -25,6 +25,7 @@
 // Header
 @import "./layout/header";
 @import "./layout/_main";
+@import "./layout/_footer";
 
 
 // ==========================================================================
@@ -36,6 +37,11 @@
 // -----------------------------------------------------------------
 
 @import "./object/component/pjcard";
+@import "./object/component/pjform";
+@import "./object/component/button";
+@import "./object/component/msgcard";
+@import "./object/component/sidebar";
+
 
 // -----------------------------------------------------------------
 // Project
@@ -43,6 +49,9 @@
 
 @import "./object/project/welcome";
 @import "./object/project/pjlist";
+@import "./object/project/pjdetail";
+@import "./object/project/mypage";
+
 
 // -----------------------------------------------------------------
 // Utility

@@ -1,26 +1,32 @@
 <template>
-  <section>
-    <h1>マイページ</h1>
-    <ul>
-      <li>
-        <a href="profile/posted-projects">投稿案件一覧</a>
-      </li>
-      <li>
-        <a href="profile/applied-projects">申し込み案件一覧</a>
-      </li>
-      <li>
-        <a href="profile/public-messages">メッセージ投稿一覧</a>
-      </li>
-      <li>
-        <a href="profile/dmrooms">dm一覧</a>
-      </li>
-    </ul>
+  <section class="p-mypage">
+    <div class="p-mypage__sidebar">
+      <Sidebar />
+    </div>
+    <div class="p-mypage__wrapper">
+      <h1>マイページ</h1>
+      <dl>
+        <dt>ユーザー名</dt>
+        <dd>{{user.name}}</dd>
+        <dt>メールアドレス</dt>
+        <dd>{{user.email}}</dd>
+        <dt>職歴等</dt>
+        <dd>{{user.intro}}</dd>
+      </dl>
+      <a href="" class="button button--primary">プロフィールを編集する</a>
+    </div>
   </section>
 </template>
 
 
 <script>
-export default {
+import axios from 'axios'
+import Sidebar from '../layouts/Sidebar'
 
+export default {
+  props: ["user"],
+  components: {
+    Sidebar
+  }
 }
 </script>

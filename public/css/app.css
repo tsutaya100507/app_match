@@ -8118,7 +8118,7 @@ button.close {
           justify-content: space-between;
   width: 100%;
   height: 70px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #000000;
 }
 
 .header__title-area {
@@ -8137,7 +8137,7 @@ button.close {
 .header__title {
   margin: 0 0 0 20px;
   font-weight: bold;
-  color: #333;
+  color: #FFF;
 }
 
 .header__menu {
@@ -8156,7 +8156,7 @@ button.close {
 }
 
 .header__menu li:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #333;
 }
 
 .header__menu li > a {
@@ -8164,12 +8164,26 @@ button.close {
   width: 100%;
   height: 100%;
   font-size: 18px;
-  color: #333;
+  color: #FFF;
   text-decoration: none;
+}
+
+.container {
+  padding: 0;
+  width: 100%;
 }
 
 .wrapper {
   margin-top: 70px;
+}
+
+.l-footer {
+  width: 100%;
+  height: 60px;
+  background-color: #000000;
+  color: #FFF;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .c-pjcard {
@@ -8225,11 +8239,109 @@ button.close {
   margin-right: 10px;
 }
 
+.c-pjform label,
+.c-pjform textarea,
+.c-pjform select {
+  display: block;
+}
+
+.c-pjform__formgroup {
+  margin-top: 20px;
+}
+
+.c-pjform__label {
+  font-size: 20px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.c-pjform__postbtn {
+  display: block;
+  margin: 0 auto 30px;
+  text-align: center;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: cadetblue;
+  color: #fff;
+}
+
+.p-pjform__alert {
+  font-weight: bold;
+  color: red;
+}
+
+.button {
+  border-radius: 20px;
+  display: inline-block;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.button--primary {
+  background-color: rgba(33, 110, 110, 0.9);
+  color: #FFFFFF;
+}
+
+.button--primary:hover {
+  background-color: rgba(33, 110, 110, 0.8);
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.button--info {
+  background-color: rgba(112, 103, 106, 0.9);
+  color: #FFFFFF;
+}
+
+.c-msgcard {
+  margin-bottom: 15px;
+  background-color: #F4F8FA;
+  width: auto;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.c-msgcard__body {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.c-sidebar {
+  height: 100%;
+  background-color: rgba(33, 110, 110, 0.2);
+}
+
+.c-sidebar ul {
+  margin: 0;
+}
+
+.c-sidebar li {
+  padding: 15px;
+}
+
+.c-sidebar li:hover {
+  background-color: rgba(33, 110, 110, 0.3);
+}
+
+.c-sidebar a {
+  display: block;
+  color: #000000;
+  font-size: 18px;
+  text-decoration: none;
+}
+
 .welcome-header {
   min-height: 100vh;
   background-image: url("../../../images/welcome.jpg");
   background-size: cover;
   background-position: center;
+}
+
+.p-pjlist {
+  padding: 30px;
 }
 
 .p-pjlist__fixedlink {
@@ -8252,4 +8364,42 @@ button.close {
 .p-pjlist__fixedlink:hover {
   text-decoration: none;
   color: #fff;
+}
+
+.p-pjdetail__title {
+  margin: 40px 0 30px;
+  line-height: 36px;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.p-pjdetail__note {
+  font-size: 1.6rem;
+}
+
+.p-pjdetail__message__area {
+  margin: 30px 0;
+  padding: 15px;
+  background-color: #e4eff7;
+}
+
+.p-pjdetail__message__title {
+  margin: 0 0 20px;
+}
+
+.p-mypage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+}
+
+.p-mypage__sidebar {
+  position: relative;
+  left: 0;
+  min-height: 100vh;
+}
+
+.p-mypage__wrapper {
+  padding: 20px;
 }

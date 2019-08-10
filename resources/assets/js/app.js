@@ -8,6 +8,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VeeValidate, {Validator} from 'vee-validate';
+import ja from 'vee-validate/dist/locale/ja';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +29,27 @@ Vue.component('DirectMessages', require('./components/templates/DirectMessages')
 Vue.component('WelcomeView', require('./components/templates/WelcomeView'))
 Vue.component('DmRoom', require('./components/templates/DmRoom'))
 
+Vue.use(VeeValidate, {
+    events: '',
+    locale: 'ja',
+    dictionary: {
+      ja: {
+        custom: {
+          title: {
+            required: '必須の項目です'
+          },
+          kana: {
+            regex: '全角かなで入力してください',
+            max:   '1文字で入力してください'
+          },
+          car_num: {
+            regex:  '半角数字で入力してください。?を含めることはできません。',
+            length: '4桁で入力してください。'
+          }
+        },
+      },
+    }})
+  Validator.localize('ja', ja);
 
 const app = new Vue({
     el: '#app'

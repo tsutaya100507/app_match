@@ -1,0 +1,34 @@
+.c-pjform label, 
+// .c-pjform input,
+.c-pjform textarea,
+.c-pjform select {
+  display: block;
+}
+
+.c-pjform__formgroup {
+  margin-top: 20px;
+}
+
+.c-pjform__label {
+  font-size: 20px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.c-pjform__postbtn {
+  display: block;
+  margin: 0 auto 30px;
+  text-align: center;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: cadetblue;
+  color: #fff;
+}
+
+.p-pjform__alert {
+  font-weight: bold;
+  color: red;
+}
