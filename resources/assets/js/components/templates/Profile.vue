@@ -1,6 +1,6 @@
 <template>
   <section class="p-mypage">
-    <div class="p-mypage__sidebar">
+    <div class="l-sidebar">
       <Sidebar />
     </div>
     <div class="p-mypage__wrapper">
@@ -13,7 +13,7 @@
         <dt>職歴等</dt>
         <dd>{{user.intro}}</dd>
       </dl>
-      <a href="" class="button button--primary">プロフィールを編集する</a>
+      <a href="/profile/edit" class="button button--primary">プロフィールを編集する</a>
     </div>
   </section>
 </template>

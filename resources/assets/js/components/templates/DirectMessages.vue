@@ -1,5 +1,8 @@
 <template>
-  <section>
+  <section class="p-dmrooms">
+    <div class="l-sidebar">
+      <Sidebar />
+    </div>
     <h1>DM一覧</h1>
     <div v-for="room in edited_rooms" :key="room.id">
       <RoomCard :room="room" />
@@ -10,11 +13,12 @@
 <script>
 import axios from 'axios'
 import RoomCard from '../parts/RoomCard'
+import Sidebar from '../layouts/Sidebar'
 
 export default {
   props: [ 'user', 'rooms', 'edited_rooms'],
   components: {
-    RoomCard
+    RoomCard, Sidebar
   },
   data() {
     return {

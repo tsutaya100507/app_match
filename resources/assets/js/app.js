@@ -28,6 +28,8 @@ Vue.component('PublicMessages', require('./components/templates/PublicMessages')
 Vue.component('DirectMessages', require('./components/templates/DirectMessages'))
 Vue.component('WelcomeView', require('./components/templates/WelcomeView'))
 Vue.component('DmRoom', require('./components/templates/DmRoom'))
+Vue.component('ProfileEdit', require('./components/templates/ProfileEdit'))
+
 
 Vue.use(VeeValidate, {
     events: '',

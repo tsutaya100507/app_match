@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="submitData" class="c-pjform">
+    {{user}}
     <div class="c-pjform__formgroup">
       <label for="title" class="c-pjform__label">タイトル</label>
       <small>発注する案件のタイトルを入力してください。</small>
@@ -40,6 +41,7 @@
 import axios from 'axios'
 
 export default {
+  props: [ 'user' ],
   data() {
     return {
       formData: {
@@ -63,15 +65,16 @@ export default {
     },
     submitData: function() {
       console.log(this.formData.title)
-            console.log(this.formData.content)
-                  console.log(this.formData.type)
+      console.log(this.formData.content)
+      console.log(this.formData.type)
+      console.log(this.user.id)
       const data = {
         title: this.formData.title,
         type:  this.formData.type,
         lower_price: this.formData.price.lower,
         upper_price: this.formData.price.upper,
         description: this.formData.description,
-        user_id: 1,
+        user_id: this.user.id,
       }
       axios.post('/project/store', data)
         .then((res) => { location.href = "/"  })

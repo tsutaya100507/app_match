@@ -22,6 +22,9 @@ Route::get('/project/{id?}', 'ProjectController@show');
 // マイページ
 Route::get('/profile', 'ProfileController@index');
 
+// プロフィール編集
+Route::get('/profile/edit', 'ProfileController@edit');
+
 // 投稿した案件一覧
 Route::get('/profile/posted-projects', 'ProjectController@postedProjects');
 

@@ -36,13 +36,17 @@ class ProjectController extends Controller
     // 新規投稿
     public function create()
     {
-        return view('project/create');
+        $user = Auth::user();
+        
+        \Log::info(Auth::user());
+        return view('project/create', ['user' => $user]);
     }
 
     // 新規保存
     public function store(Request $request)
     {
         \Log::info('ログ出力テスト');
+        \Log::info($request->user_id);
         $project = new Project();
         $project->title = $request->title;
         $project->type = $request->type;

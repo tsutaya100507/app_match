@@ -19,7 +19,8 @@ class ProjectController extends Controller
     }
 
     public function getLoginUserProject(Request $request) {
-        $projects = Project::where('user_id', $request->user_id)->get();
+        $projects = Project::join('users', 'projects.user_id', '=', 'users.id')->where('user_id', $request->user_id)->get();
+        \Log::info($projects);
 
         return response($projects, 201);
     }
