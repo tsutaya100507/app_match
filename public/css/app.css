@@ -8286,8 +8286,17 @@ textarea {
   color: red;
 }
 
-.c-pjform {
+.c-profform {
   padding: 20px;
+}
+
+.c-profform__formgroup {
+  margin-bottom: 20px;
+}
+
+.c-profform__input {
+  display: block;
+  width: 300px;
 }
 
 .button {

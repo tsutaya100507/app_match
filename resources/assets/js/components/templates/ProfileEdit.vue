@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>新規投稿</h1>
+    <h1>プロフィール編集</h1>
     <ProfileForm :user="user" />
   </section>
 </template>

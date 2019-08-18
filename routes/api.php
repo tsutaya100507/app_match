@@ -50,3 +50,5 @@ Route::get('/dms', 'Api\DirectMessageController@show');
 // DMの投稿
 Route::post('/dm', 'Api\DirectMessageController@store');
 
+// プロフィール編集
+Route::patch('/profile', 'Api\ProfileController@update');

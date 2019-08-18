@@ -1711,10 +1711,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
@@ -1739,7 +1735,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     submitData: function submitData() {
-      console.log('its working');
+      var url = '/api/profile';
+      var data = {
+        id: this.user.id,
+        name: this.formData.name,
+        email: this.formData.email,
+        intro: this.formData.intro
+      };
+      axios.patch(url, data).then(function (res) {
+        location.href = "/profile";
+        alert('プロフィールを更新しました。');
+      }).catch(function (error) {
+        alert("投稿が失敗しました。");
+      });
     }
   }
 });
@@ -45054,7 +45062,7 @@ var render = function() {
   return _c(
     "section",
     [
-      _c("h1", [_vm._v("新規投稿")]),
+      _c("h1", [_vm._v("プロフィール編集")]),
       _vm._v(" "),
       _c("ProfileForm", { attrs: { user: _vm.user } })
     ],
@@ -45381,7 +45389,7 @@ var render = function() {
   return _c(
     "form",
     {
-      staticClass: "c-pjform",
+      staticClass: "c-profform",
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -45390,7 +45398,7 @@ var render = function() {
       }
     },
     [
-      _c("div", { staticClass: "c-pjform__formgroup" }, [
+      _c("div", { staticClass: "c-profform__formgroup" }, [
         _c(
           "label",
           { staticClass: "c-profform__label", attrs: { for: "name" } },
@@ -45418,6 +45426,7 @@ var render = function() {
               expression: "'required'"
             }
           ],
+          staticClass: "c-profform__input",
           attrs: { type: "text" },
           domProps: { value: _vm.formData.name },
           on: {
@@ -45453,6 +45462,7 @@ var render = function() {
               expression: "'required'"
             }
           ],
+          staticClass: "c-profform__input",
           attrs: { name: "email" },
           domProps: { value: _vm.formData.email },
           on: {
@@ -45473,12 +45483,6 @@ var render = function() {
           [_vm._v("職歴等")]
         ),
         _vm._v(" "),
-        _vm.errors.has("title")
-          ? _c("p", { staticClass: "p-profform__alert" }, [
-              _vm._v("\n      " + _vm._s(_vm.errors.first("title")) + "\n    ")
-            ])
-          : _vm._e(),
-        _vm._v(" "),
         _c("textarea", {
           directives: [
             {
@@ -45488,7 +45492,7 @@ var render = function() {
               expression: "formData.intro"
             }
           ],
-          attrs: { name: "intro", id: "", rows: "20" },
+          attrs: { name: "intro", id: "", rows: "10" },
           domProps: { value: _vm.formData.intro },
           on: {
             input: function($event) {
