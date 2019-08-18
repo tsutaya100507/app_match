@@ -1770,10 +1770,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProjectCard',
-  props: ['project']
+  props: ['project'],
+  computed: {
+    isReward: function isReward() {
+      if (this.project.type === 1) {
+        return true;
+      }
+      return false;
+    }
+  }
 });
 
 /***/ }),
@@ -2110,12 +2124,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user'],
   components: {
     ProjectCard: __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard___default.a, Sidebar: __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar___default.a
   },
@@ -2126,11 +2149,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    getAppliedProject: function getAppliedProject() {
+    getAppliedProjects: function getAppliedProjects() {
       var _this = this;
 
       console.log(this.user.id);
-      var url = "/api/user/applied_projects";
+      var url = "/api/applications";
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
         params: {
           user_id: this.user.id
@@ -2141,7 +2164,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    // this.getAppliedProject()
+    this.getAppliedProjects();
   }
 });
 
@@ -2218,6 +2241,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2244,6 +2273,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else {
         return false;
       }
+    },
+    isReward: function isReward() {
+      if (this.project.type === 0) {
+        return false;
+      }
+      return true;
     }
   },
   methods: {
@@ -2449,8 +2484,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__layouts_Sidebar__ = __webpack_require__("./resources/assets/js/components/layouts/Sidebar.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__layouts_Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__layouts_Sidebar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__("./node_modules/axios/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__ = __webpack_require__("./resources/assets/js/components/parts/ProjectCard.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar__ = __webpack_require__("./resources/assets/js/components/layouts/Sidebar.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar__);
 //
 //
 //
@@ -2460,12 +2499,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user'],
   components: {
-    Sidebar: __WEBPACK_IMPORTED_MODULE_0__layouts_Sidebar___default.a
+    ProjectCard: __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard___default.a, Sidebar: __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar___default.a
+  },
+  data: function data() {
+    return {
+      projects: []
+    };
+  },
+
+  methods: {
+    getMessagedProjects: function getMessagedProjects() {
+      var _this = this;
+
+      console.log(this.user.id);
+      var url = "/api/project/messaged";
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
+        params: {
+          user_id: this.user.id
+        }
+      }).then(function (res) {
+        _this.projects = res.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getMessagedProjects();
   }
 });
 
@@ -44633,7 +44712,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
+  return _c("section", { staticClass: "p-pjdetail" }, [
     _c("h1", { staticClass: "p-pjdetail__title" }, [
       _vm._v(_vm._s(_vm.project.title))
     ]),
@@ -44651,6 +44730,14 @@ var render = function() {
         _c("dd", [_vm._v(_vm._s(_vm.project.type))])
       ]),
       _vm._v(" "),
+      _vm.isReward
+        ? _c("dl", { staticClass: "p-pjdetail__note" }, [
+            _c("dt", [_vm._v("報酬額")]),
+            _vm._v(" "),
+            _c("dd", [_vm._v(_vm._s(_vm.project.lower_price))])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("dl", { staticClass: "p-pjdetail__note" }, [
         _c("dt", [_vm._v("投稿者")]),
         _vm._v(" "),
@@ -44666,17 +44753,25 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm.wasApplied
-      ? _c(
-          "span",
-          { staticClass: "button button--info", attrs: { disalbled: "" } },
-          [_vm._v("申し込み済み")]
-        )
-      : _c(
-          "button",
-          { staticClass: "button button--primary", on: { click: _vm.doApply } },
-          [_vm._v("申し込んでみる")]
-        ),
+    _c("div", { staticClass: "p-pjdetail__btn" }, [
+      _vm.wasApplied
+        ? _c(
+            "span",
+            {
+              staticClass: "button button--info u-w100 u-fs16",
+              attrs: { disalbled: "" }
+            },
+            [_vm._v("申し込み済み")]
+          )
+        : _c(
+            "button",
+            {
+              staticClass: "button button--primary u-w100 u-fs16",
+              on: { click: _vm.doApply }
+            },
+            [_vm._v("申し込んでみる")]
+          )
+    ]),
     _vm._v(" "),
     _c(
       "section",
@@ -44800,22 +44895,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "p-pjapplied" },
-    [
-      _c("div", { staticClass: "l-sidebar" }, [_c("Sidebar")], 1),
-      _vm._v(" "),
-      _c("h1", [_vm._v("申し込み案件一覧")]),
-      _vm._v(" "),
-      _vm._l(_vm.projects, function(project) {
-        return _c("ul", { key: project.id }, [
-          _c("li", [_c("ProjectCard", { attrs: { project: project } })], 1)
-        ])
-      })
-    ],
-    2
-  )
+  return _c("section", { staticClass: "p-pjapplied" }, [
+    _c("div", { staticClass: "l-sidebar" }, [_c("Sidebar")], 1),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "p-pjapplied__wrapper" },
+      [
+        _vm._v("\n    " + _vm._s(_vm.projects) + "\n  "),
+        _c("h1", [_vm._v("申し込み案件一覧")]),
+        _vm._v(" "),
+        _vm._l(_vm.projects, function(project) {
+          return _c("ul", { key: project.id }, [
+            _c(
+              "li",
+              [
+                _c("ProjectCard", { attrs: { project: project } }, [
+                  _c(
+                    "dl",
+                    {
+                      staticClass: "c-pjcard__note",
+                      attrs: { slot: "apply" },
+                      slot: "apply"
+                    },
+                    [
+                      _c("dt", [_vm._v("申込日時")]),
+                      _vm._v(" "),
+                      _c("dd", [_vm._v(_vm._s(project.created_at))])
+                    ]
+                  )
+                ])
+              ],
+              1
+            )
+          ])
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45009,7 +45127,47 @@ var render = function() {
   return _c("section", { staticClass: "p-pubmessages" }, [
     _c("div", { staticClass: "l-sidebar" }, [_c("Sidebar")], 1),
     _vm._v(" "),
-    _c("h1", [_vm._v("メッセージした案件一覧")])
+    _c(
+      "div",
+      { staticClass: "p-pjapplied__wrapper" },
+      [
+        _vm._v("\n    " + _vm._s(_vm.projects) + "\n  "),
+        _c("h1", [_vm._v("メッセージした案件一覧")]),
+        _vm._v(" "),
+        _vm._l(_vm.projects, function(project) {
+          return _c("ul", { key: project.id }, [
+            _c(
+              "li",
+              [
+                _c("ProjectCard", { attrs: { project: project } }, [
+                  _c(
+                    "dl",
+                    {
+                      staticClass: "c-pjcard__note",
+                      attrs: { slot: "message" },
+                      slot: "message"
+                    },
+                    [
+                      _c("dt", [_vm._v("最新メッセージ")]),
+                      _vm._v(" "),
+                      _c("dd", [
+                        _vm._v(
+                          _vm._s(project.message) +
+                            " by " +
+                            _vm._s(project.user_name)
+                        )
+                      ])
+                    ]
+                  )
+                ])
+              ],
+              1
+            )
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []
@@ -45040,19 +45198,42 @@ var render = function() {
     _vm._v(" "),
     _c("p", [_vm._v(_vm._s(_vm.project.description))]),
     _vm._v(" "),
-    _c("div", { staticClass: "c-pjcard__terms" }, [
-      _c("dl", { staticClass: "c-pjcard__note" }, [
-        _c("dt", [_vm._v("案件タイプ")]),
+    _c(
+      "div",
+      { staticClass: "c-pjcard__terms" },
+      [
+        _c("dl", { staticClass: "c-pjcard__note" }, [
+          _c("dt", [_vm._v("案件タイプ")]),
+          _vm._v(" "),
+          _c("dd", [_vm._v(_vm._s(_vm.project.type))])
+        ]),
         _vm._v(" "),
-        _c("dd", [_vm._v(_vm._s(_vm.project.type))])
-      ]),
-      _vm._v(" "),
-      _c("dl", { staticClass: "c-pjcard__note" }, [
-        _c("dt", [_vm._v("投稿者")]),
+        _vm.isReward
+          ? _c("dl", { staticClass: "c-pjcard__note" }, [
+              _c("dt", [_vm._v("報酬")]),
+              _vm._v(" "),
+              _c("dd", [
+                _vm._v(
+                  _vm._s(_vm.project.lower_price) +
+                    " ~ " +
+                    _vm._s(_vm.project.upper_price)
+                )
+              ])
+            ])
+          : _vm._e(),
         _vm._v(" "),
-        _c("dd", [_vm._v(_vm._s(_vm.project.name))])
-      ])
-    ])
+        _c("dl", { staticClass: "c-pjcard__note" }, [
+          _c("dt", [_vm._v("投稿者")]),
+          _vm._v(" "),
+          _c("dd", [_vm._v(_vm._s(_vm.project.name))])
+        ]),
+        _vm._v(" "),
+        _vm._t("apply"),
+        _vm._v(" "),
+        _vm._t("message")
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []

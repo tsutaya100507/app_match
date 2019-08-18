@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div id="app">
-        <project-applied></project-applied>
+        <project-applied :user="{{$user}}" />
     </div>
 </div>
 @endsection

@@ -29,8 +29,14 @@ Route::get('/application', 'Api\ApplicationController@check');
 // 案件への申し込み
 Route::post('/application/store', 'Api\ApplicationController@store');
 
+// 申し込んだ案件一覧の取得
+Route::get('/applications', 'Api\ApplicationController@index');
+
 // パブリックメッセージの取得
 Route::get('/project/{project_id}/messages', 'Api\MessageController@show');
+
+// パブリックメッセージを投稿した案件一覧
+Route::get('/project/messaged', 'Api\ProjectController@getMessagedProjects');
 
 // パブリックメッセージの投稿
 Route::post('/message', 'Api\MessageController@store');

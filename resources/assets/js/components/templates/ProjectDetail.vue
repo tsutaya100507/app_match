@@ -1,24 +1,30 @@
 <template>
-  <section>
+  <section class="p-pjdetail">
     <h1 class="p-pjdetail__title">{{ project.title }}</h1>
     <dl class="p-pjdetail__note">
       <dt>案件詳細</dt>
       <dd><p>{{ project.description }}</p></dd>
     </dl>
     <div class="p-pjdetail__terms">
-        <dl class="p-pjdetail__note">
-          <dt>案件タイプ</dt>
-          <dd>{{project.type}}</dd>
-        </dl>
-        <dl class="p-pjdetail__note">
-          <dt>投稿者</dt>
-          <dd>{{project.name}}</dd>
-          <a :href="'/dmroom/' + room[0].id" v-if="isRoom">DMページへ</a>
-          <button v-on:click="createRoom" v-else>案件投稿者へのDMを送る</button>
-        </dl>
-      </div>
-    <span v-if="wasApplied" class="button button--info" disalbled>申し込み済み</span>
-    <button v-on:click="doApply" v-else class="button button--primary">申し込んでみる</button>
+      <dl class="p-pjdetail__note">
+        <dt>案件タイプ</dt>
+        <dd>{{project.type}}</dd>
+      </dl>
+      <dl class="p-pjdetail__note" v-if="isReward">
+        <dt>報酬額</dt>
+        <dd>{{project.lower_price}}</dd>
+      </dl>
+      <dl class="p-pjdetail__note">
+        <dt>投稿者</dt>
+        <dd>{{project.name}}</dd>
+        <a :href="'/dmroom/' + room[0].id" v-if="isRoom">DMページへ</a>
+        <button v-on:click="createRoom" v-else>案件投稿者へのDMを送る</button>
+      </dl>
+    </div>
+    <div class="p-pjdetail__btn">
+      <span v-if="wasApplied" class="button button--info u-w100 u-fs16" disalbled>申し込み済み</span>
+      <button v-on:click="doApply" v-else class="button button--primary u-w100 u-fs16">申し込んでみる</button>
+    </div>
     <section class="p-pjdetail__message__area">
         <h2 class="p-pjdetail__message__title">メッセージ</h2>
         <ul v-for="message in messages" :key="message.id">
@@ -59,6 +65,12 @@ export default {
       } else {
         return false
       }
+    },
+    isReward() {
+      if (this.project.type === 0) {
+        return false
+      }
+      return true
     }
   },
   methods: {

@@ -71,6 +71,7 @@ class ProjectController extends Controller
     // 投稿した案件一覧
     public function appliedProjects()
     {
-        return view('project/applied');
+        $user = Auth::user();
+        return view('project/applied', ['user' => $user]);
     }
 }

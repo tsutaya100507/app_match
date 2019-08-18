@@ -8,6 +8,25 @@ use App\Application;
 
 class ApplicationController extends Controller
 {
+    public function index(Request $request)
+    {
+        \Log::info($request);
+        $applications = Application::join('projects', 'applications.project_id', '=', 'projects.id')
+                                   ->join('users', 'projects.user_id', '=', 'users.id')
+                                   ->where('applications.user_id', $request->user_id)
+                                   ->select('applications.created_at',
+                                            'projects.id',
+                                            'projects.title', 
+                                            'projects.description', 
+                                            'projects.type', 
+                                            'projects.lower_price',
+                                            'projects.upper_price',
+                                            'users.name')
+                                   ->get();
+        \Log::info($applications); 
+        return $applications;    
+    }
+    
     public function check(Request $request)
     {
         \Log::info($request);
@@ -23,7 +42,6 @@ class ApplicationController extends Controller
         //     return response($result, 201);
         // }
         return $application;
-
     }
 
     public function store(Request $request)
