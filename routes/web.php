@@ -19,6 +19,9 @@ Route::post('/project/store', 'ProjectController@store');
 // 案件詳細
 Route::get('/project/{id?}', 'ProjectController@show');
 
+// 案件編集
+Route::get('/project/{id?}/edit', 'ProjectController@edit');
+
 // マイページ
 Route::get('/profile', 'ProfileController@index');
 

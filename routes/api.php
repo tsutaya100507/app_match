@@ -20,6 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // 案件一覧の取得
 Route::get('/projects', 'Api\ProjectController@index');
 
+// 案件更新
+Route::patch('/project/update', 'Api\ProjectController@update');
+
 // ログインユーザーが投稿した案件一覧を取得
 Route::get('/user/projects', 'Api\ProjectController@getLoginUserProject');
 

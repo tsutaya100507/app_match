@@ -1784,6 +1784,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProjectCard',
@@ -1794,6 +1795,109 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return true;
       }
       return false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/parts/ProjectEditForm.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__("./node_modules/axios/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user', 'project'],
+  data: function data() {
+    return {
+      formData: {
+        title: this.project.title,
+        type: this.project.type,
+        price: {
+          lower: this.project.lower_price,
+          upper: this.project.upper_price
+        },
+        description: this.project.description
+      }
+    };
+  },
+
+  methods: {
+    validateData: function validateData() {
+      var _this = this;
+
+      this.$validator.validateAll().then(function (result) {
+        if (result) {
+          _this.submitData();
+        }
+      });
+    },
+
+    submitData: function submitData() {
+      console.log(this.formData.title);
+      console.log(this.formData.content);
+      console.log(this.formData.type);
+      console.log(this.project.id);
+      var data = {
+        id: this.project.id,
+        title: this.formData.title,
+        type: this.formData.type,
+        lower_price: this.formData.price.lower,
+        upper_price: this.formData.price.upper,
+        description: this.formData.description,
+        user_id: this.user.id
+      };
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.patch('/api/project/update', data).then(function (res) {
+        location.href = "/profile/posted-projects";
+      }).catch(function (error) {
+        alert("編集が失敗しました。");
+      });
     }
   }
 });
@@ -1846,6 +1950,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1856,6 +1969,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       formData: {
         title: "",
         type: 0,
+        typeOptions: [{ text: "レベニューシェア", value: 0 }, { text: "単発案件", value: 1 }],
         price: {
           lower: 0,
           upper: 0
@@ -1865,6 +1979,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+  computed: {
+    isReward: function isReward() {
+      if (this.formData.type == 1) {
+        return true;
+      }
+      return false;
+    }
+  },
   methods: {
     validateData: function validateData() {
       var _this = this;
@@ -2366,6 +2488,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/templates/ProjectEdit.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parts_ProjectEditForm__ = __webpack_require__("./resources/assets/js/components/parts/ProjectEditForm.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parts_ProjectEditForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__parts_ProjectEditForm__);
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user', 'project'],
+  components: {
+    ProjectEditForm: __WEBPACK_IMPORTED_MODULE_0__parts_ProjectEditForm___default.a
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/templates/ProjectList.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2375,9 +2523,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__ = __webpack_require__("./resources/assets/js/components/parts/ProjectCard.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__);
-//
-//
-//
 //
 //
 //
@@ -2448,6 +2593,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2468,7 +2617,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getPostedProject: function getPostedProject() {
       var _this = this;
 
-      console.log(this.user.id);
       var url = "/api/user/projects";
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
         params: {
@@ -44975,7 +45123,24 @@ var render = function() {
         _vm._v(" "),
         _vm._l(_vm.projects, function(project) {
           return _c("ul", { key: project.id }, [
-            _c("li", [_c("ProjectCard", { attrs: { project: project } })], 1)
+            _c(
+              "li",
+              [
+                _c("ProjectCard", { attrs: { project: project } }, [
+                  _c("div", { attrs: { slot: "editLink" }, slot: "editLink" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "button button--primary",
+                        attrs: { href: "/project/" + project.id + "/edit" }
+                      },
+                      [_vm._v("編集")]
+                    )
+                  ])
+                ])
+              ],
+              1
+            )
           ])
         })
       ],
@@ -45197,52 +45362,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "c-pjcard" }, [
-    _c("a", { attrs: { href: "/project/" + _vm.project.id } }, [
-      _c("h2", { staticClass: "c-pjcard__title" }, [
-        _vm._v(_vm._s(_vm.project.title))
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.project.description))]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "c-pjcard__terms" },
-      [
-        _c("dl", { staticClass: "c-pjcard__note" }, [
-          _c("dt", [_vm._v("案件タイプ")]),
+  return _c(
+    "li",
+    { staticClass: "c-pjcard" },
+    [
+      _c("a", { attrs: { href: "/project/" + _vm.project.id } }, [
+        _c("h2", { staticClass: "c-pjcard__title" }, [
+          _vm._v(_vm._s(_vm.project.title))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.project.description))]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "c-pjcard__terms" },
+        [
+          _c("dl", { staticClass: "c-pjcard__note" }, [
+            _c("dt", [_vm._v("案件タイプ")]),
+            _vm._v(" "),
+            _c("dd", [_vm._v(_vm._s(_vm.project.type))])
+          ]),
           _vm._v(" "),
-          _c("dd", [_vm._v(_vm._s(_vm.project.type))])
-        ]),
-        _vm._v(" "),
-        _vm.isReward
-          ? _c("dl", { staticClass: "c-pjcard__note" }, [
-              _c("dt", [_vm._v("報酬")]),
-              _vm._v(" "),
-              _c("dd", [
-                _vm._v(
-                  _vm._s(_vm.project.lower_price) +
-                    " ~ " +
-                    _vm._s(_vm.project.upper_price)
-                )
+          _vm.isReward
+            ? _c("dl", { staticClass: "c-pjcard__note" }, [
+                _c("dt", [_vm._v("報酬")]),
+                _vm._v(" "),
+                _c("dd", [
+                  _vm._v(
+                    _vm._s(_vm.project.lower_price) +
+                      "千円 ~ " +
+                      _vm._s(_vm.project.upper_price) +
+                      "千円"
+                  )
+                ])
               ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("dl", { staticClass: "c-pjcard__note" }, [
-          _c("dt", [_vm._v("投稿者")]),
+            : _vm._e(),
           _vm._v(" "),
-          _c("dd", [_vm._v(_vm._s(_vm.project.name))])
-        ]),
-        _vm._v(" "),
-        _vm._t("apply"),
-        _vm._v(" "),
-        _vm._t("message")
-      ],
-      2
-    )
-  ])
+          _c("dl", { staticClass: "c-pjcard__note" }, [
+            _c("dt", [_vm._v("投稿者")]),
+            _vm._v(" "),
+            _c("dd", [_vm._v(_vm._s(_vm.project.name))])
+          ]),
+          _vm._v(" "),
+          _vm._t("apply"),
+          _vm._v(" "),
+          _vm._t("message")
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm._t("editLink")
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45306,6 +45479,295 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9720ed5e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/parts/ProjectEditForm.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "c-pjform",
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submitData($event)
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "c-pjform__formgroup" }, [
+        _c(
+          "label",
+          { staticClass: "c-pjform__label", attrs: { for: "title" } },
+          [_vm._v("タイトル")]
+        ),
+        _vm._v(" "),
+        _c("small", [_vm._v("発注する案件のタイトルを入力してください。")]),
+        _vm._v(" "),
+        _vm.errors.has("title")
+          ? _c("p", { staticClass: "p-pjform__alert" }, [
+              _vm._v("\n      " + _vm._s(_vm.errors.first("title")) + "\n    ")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.title,
+              expression: "formData.title"
+            },
+            {
+              name: "validate",
+              rawName: "v-validate",
+              value: "required",
+              expression: "'required'"
+            }
+          ],
+          attrs: { name: "title", id: "title", cols: "100", rows: "2" },
+          domProps: { value: _vm.formData.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "title", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c-pjform__formgroup" }, [
+        _c(
+          "label",
+          { staticClass: "c-pjform__label", attrs: { for: "type" } },
+          [_vm._v("種別")]
+        ),
+        _vm._v(" "),
+        _c("small", [
+          _vm._v("レベニューシェアか単発で報酬を支払う案件か選択してください。")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.type,
+                expression: "formData.type"
+              }
+            ],
+            attrs: { name: "type", id: "type" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.formData,
+                  "type",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "0" } }, [
+              _vm._v("レベニューシェア")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("単発案件")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.formData.type == 1
+        ? _c("div", { staticClass: "c-pjform__formgroup" }, [
+            _c(
+              "label",
+              { staticClass: "c-pjform__label", attrs: { for: "price" } },
+              [_vm._v("報酬額")]
+            ),
+            _vm._v(" "),
+            _c("small", [_vm._v("想定する報酬額の範囲を入力してください。")]),
+            _vm._v(" "),
+            _vm.errors.has("lower_price")
+              ? _c("p", { staticClass: "p-pjform__alert" }, [
+                  _vm._v(
+                    "\n      " +
+                      _vm._s(_vm.errors.first("lower_price")) +
+                      "\n    "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.price.lower,
+                  expression: "formData.price.lower"
+                },
+                {
+                  name: "validate",
+                  rawName: "v-validate",
+                  value: "min_value:1",
+                  expression: "'min_value:1'"
+                }
+              ],
+              attrs: { type: "text", name: "lower_price", id: "lower_price" },
+              domProps: { value: _vm.formData.price.lower },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData.price, "lower", $event.target.value)
+                }
+              }
+            }),
+            _vm._v("千円~\n    "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.price.upper,
+                  expression: "formData.price.upper"
+                },
+                {
+                  name: "validate",
+                  rawName: "v-validate",
+                  value: "min_value:1",
+                  expression: "'min_value:1'"
+                }
+              ],
+              attrs: { type: "text", name: "upper_price", id: "upper_price" },
+              domProps: { value: _vm.formData.price.upper },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData.price, "upper", $event.target.value)
+                }
+              }
+            }),
+            _vm._v("千円\n  ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "c-pjform__formgroup" }, [
+        _c(
+          "label",
+          { staticClass: "c-pjform__label", attrs: { for: "content" } },
+          [_vm._v("内容")]
+        ),
+        _vm._v(" "),
+        _c("small", [_vm._v("発注する案件の内容を入力してください。")]),
+        _vm._v(" "),
+        _vm.errors.has("title")
+          ? _c("p", { staticClass: "p-pjform__alert" }, [
+              _vm._v("\n      " + _vm._s(_vm.errors.first("title")) + "\n    ")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.description,
+              expression: "formData.description"
+            },
+            {
+              name: "validate",
+              rawName: "v-validate",
+              value: "required",
+              expression: "'required'"
+            }
+          ],
+          attrs: { name: "", id: "", rows: "20" },
+          domProps: { value: _vm.formData.description },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "description", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c-pjform__formgroup" }, [
+        _c(
+          "button",
+          {
+            staticClass: "c-pjform__postbtn",
+            attrs: { type: "button" },
+            on: { click: _vm.validateData }
+          },
+          [_vm._v("内容を更新する")]
+        )
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9720ed5e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9893ea74\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/templates/ProjectEdit.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    { staticClass: "c-pjform" },
+    [
+      _c("h1", [_vm._v("案件編集")]),
+      _vm._v(" "),
+      _c("ProjectEditForm", { attrs: { project: _vm.project, user: _vm.user } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9893ea74", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9d89643e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/parts/MessageCard.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45353,16 +45815,7 @@ var render = function() {
           [_c("ProjectCard", { attrs: { project: project } })],
           1
         )
-      }),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "p-pjlist__fixedlink",
-          attrs: { href: "/project/create" }
-        },
-        [_vm._v("\n    案件投稿\n  ")]
-      )
+      })
     ],
     2
   )
@@ -45589,7 +46042,6 @@ var render = function() {
       }
     },
     [
-      _vm._v("\n  " + _vm._s(_vm.user) + "\n  "),
       _c("div", { staticClass: "c-pjform__formgroup" }, [
         _c(
           "label",
@@ -45674,70 +46126,93 @@ var render = function() {
               }
             }
           },
-          [
-            _c("option", { attrs: { value: "0" } }, [
-              _vm._v("レベニューシェア")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("単発案件")])
-          ]
+          _vm._l(_vm.formData.typeOptions, function(option) {
+            return _c(
+              "option",
+              { key: option.value, domProps: { value: option.value } },
+              [_vm._v("\n      " + _vm._s(option.text) + "\n      ")]
+            )
+          }),
+          0
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "c-pjform__formgroup" }, [
-        _c(
-          "label",
-          { staticClass: "c-pjform__label", attrs: { for: "price" } },
-          [_vm._v("報酬額")]
-        ),
-        _vm._v(" "),
-        _c("small", [
-          _vm._v("レベニューシェアか単発で報酬を支払う案件か選択してください。")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.price.lower,
-              expression: "formData.price.lower"
-            }
-          ],
-          attrs: { type: "text", name: "lower_price" },
-          domProps: { value: _vm.formData.price.lower },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _vm.isReward
+        ? _c("div", { staticClass: "c-pjform__formgroup" }, [
+            _c(
+              "label",
+              { staticClass: "c-pjform__label", attrs: { for: "price" } },
+              [_vm._v("報酬額")]
+            ),
+            _vm._v(" "),
+            _c("small", [_vm._v("想定する報酬額の範囲を入力してください。")]),
+            _vm._v(" "),
+            _vm.errors.has("lower_price")
+              ? _c("p", { staticClass: "p-pjform__alert" }, [
+                  _vm._v(
+                    "\n      " +
+                      _vm._s(_vm.errors.first("lower_price")) +
+                      "\n    "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.price.lower,
+                  expression: "formData.price.lower"
+                },
+                {
+                  name: "validate",
+                  rawName: "v-validate",
+                  value: "min_value:1",
+                  expression: "'min_value:1'"
+                }
+              ],
+              attrs: { type: "text", name: "lower_price", id: "lower_price" },
+              domProps: { value: _vm.formData.price.lower },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData.price, "lower", $event.target.value)
+                }
               }
-              _vm.$set(_vm.formData.price, "lower", $event.target.value)
-            }
-          }
-        }),
-        _vm._v("千円~\n    "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.price.upper,
-              expression: "formData.price.upper"
-            }
-          ],
-          attrs: { type: "text", name: "upper_price" },
-          domProps: { value: _vm.formData.price.upper },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+            }),
+            _vm._v("千円~\n    "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.price.upper,
+                  expression: "formData.price.upper"
+                },
+                {
+                  name: "validate",
+                  rawName: "v-validate",
+                  value: "min_value:1",
+                  expression: "'min_value:1'"
+                }
+              ],
+              attrs: { type: "text", name: "upper_price", id: "lower_price" },
+              domProps: { value: _vm.formData.price.upper },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData.price, "upper", $event.target.value)
+                }
               }
-              _vm.$set(_vm.formData.price, "upper", $event.target.value)
-            }
-          }
-        }),
-        _vm._v("千円\n  ")
-      ]),
+            }),
+            _vm._v("千円\n  ")
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "c-pjform__formgroup" }, [
         _c(
@@ -45748,9 +46223,11 @@ var render = function() {
         _vm._v(" "),
         _c("small", [_vm._v("発注する案件の内容を入力してください。")]),
         _vm._v(" "),
-        _vm.errors.has("title")
+        _vm.errors.has("description")
           ? _c("p", { staticClass: "p-pjform__alert" }, [
-              _vm._v("\n      " + _vm._s(_vm.errors.first("title")) + "\n    ")
+              _vm._v(
+                "\n      " + _vm._s(_vm.errors.first("description")) + "\n    "
+              )
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -45769,7 +46246,7 @@ var render = function() {
               expression: "'required'"
             }
           ],
-          attrs: { name: "", id: "", rows: "20" },
+          attrs: { name: "description", id: "description", rows: "20" },
           domProps: { value: _vm.formData.description },
           on: {
             input: function($event) {
@@ -57855,6 +58332,7 @@ Vue.component('example', __webpack_require__("./resources/assets/js/components/E
 Vue.component('ProjectList', __webpack_require__("./resources/assets/js/components/templates/ProjectList.vue"));
 Vue.component('ProjectDetail', __webpack_require__("./resources/assets/js/components/templates/ProjectDetail.vue"));
 Vue.component('ProjectCreate', __webpack_require__("./resources/assets/js/components/templates/ProjectCreate.vue"));
+Vue.component('ProjectEdit', __webpack_require__("./resources/assets/js/components/templates/ProjectEdit.vue"));
 Vue.component('Profile', __webpack_require__("./resources/assets/js/components/templates/Profile.vue"));
 Vue.component('ProjectApplied', __webpack_require__("./resources/assets/js/components/templates/ProjectApplied.vue"));
 Vue.component('ProjectPosted', __webpack_require__("./resources/assets/js/components/templates/ProjectPosted.vue"));
@@ -57873,13 +58351,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vee_validate__["b" /* default */], {
         title: {
           required: '必須の項目です'
         },
-        kana: {
-          regex: '全角かなで入力してください',
-          max: '1文字で入力してください'
+        lower_price: {
+          min_value: '1以上の数値を入力してください'
         },
-        car_num: {
-          regex: '半角数字で入力してください。?を含めることはできません。',
-          length: '4桁で入力してください。'
+        description: {
+          required: '必須の項目です'
         }
       }
     }
@@ -58228,6 +58704,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-6a3566f3", Component.options)
   } else {
     hotAPI.reload("data-v-6a3566f3", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/parts/ProjectEditForm.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/parts/ProjectEditForm.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9720ed5e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/parts/ProjectEditForm.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/parts/ProjectEditForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9720ed5e", Component.options)
+  } else {
+    hotAPI.reload("data-v-9720ed5e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -58660,6 +59184,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-2bf1008d", Component.options)
   } else {
     hotAPI.reload("data-v-2bf1008d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/templates/ProjectEdit.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/templates/ProjectEdit.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9893ea74\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/templates/ProjectEdit.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/templates/ProjectEdit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9893ea74", Component.options)
+  } else {
+    hotAPI.reload("data-v-9893ea74", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

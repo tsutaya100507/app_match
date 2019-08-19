@@ -7,7 +7,11 @@
       <h1 class="p-pjposted__title">投稿案件一覧</h1>
       <ul v-for="project in projects" :key="project.id">
         <li>
-          <ProjectCard :project="project" />
+          <ProjectCard :project="project">
+            <div slot="editLink">
+              <a :href="'/project/' + project.id + '/edit'" class="button button--primary">編集</a>
+            </div>
+          </ProjectCard>
         </li>
       </ul>
     </div>
@@ -31,7 +35,6 @@ export default {
   },
   methods: {
     getPostedProject() {
-      console.log(this.user.id)
       const url = "/api/user/projects"
       axios.get(url, {
         params: {

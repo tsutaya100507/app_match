@@ -11,7 +11,7 @@
         </dl>
         <dl class="c-pjcard__note" v-if="isReward">
           <dt>報酬</dt>
-          <dd>{{project.lower_price}} ~ {{project.upper_price}}</dd>
+          <dd>{{project.lower_price}}千円 ~ {{project.upper_price}}千円</dd>
         </dl>
         <dl class="c-pjcard__note">
           <dt>投稿者</dt>
@@ -20,6 +20,7 @@
         <slot name="apply"></slot>
         <slot name="message"></slot>
       </div>
+      <slot name="editLink"></slot>
   </li>
 </template>
 

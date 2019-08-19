@@ -21,6 +21,7 @@ Vue.component('example', require('./components/Example.vue'))
 Vue.component('ProjectList', require('./components/templates/ProjectList'))
 Vue.component('ProjectDetail', require('./components/templates/ProjectDetail'))
 Vue.component('ProjectCreate', require('./components/templates/ProjectCreate'))
+Vue.component('ProjectEdit', require('./components/templates/ProjectEdit'))
 Vue.component('Profile', require('./components/templates/Profile'))
 Vue.component('ProjectApplied', require('./components/templates/ProjectApplied'))
 Vue.component('ProjectPosted', require('./components/templates/ProjectPosted'))
@@ -40,13 +41,11 @@ Vue.use(VeeValidate, {
           title: {
             required: '必須の項目です'
           },
-          kana: {
-            regex: '全角かなで入力してください',
-            max:   '1文字で入力してください'
+          lower_price: {
+            min_value: '1以上の数値を入力してください'
           },
-          car_num: {
-            regex:  '半角数字で入力してください。?を含めることはできません。',
-            length: '4桁で入力してください。'
+          description: {
+            required: '必須の項目です'
           }
         },
       },

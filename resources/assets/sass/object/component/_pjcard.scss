@@ -7,7 +7,7 @@
   }
 }
 
-.c-pjcard a {
+.c-pjcard > a {
   color: rgb(78, 77, 77);
   h2 {
     line-height: 1.4;
@@ -19,7 +19,7 @@
   }
 }
 
-.c-pjcard a:hover {
+.c-pjcard > a:hover {
   text-decoration: none;
   color: gray;
   transform: scale(1.1);

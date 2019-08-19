@@ -4,9 +4,6 @@
     <ul v-for="project in projects" :key="project.id">
       <ProjectCard :project="project" />
     </ul> 
-    <a href="/project/create" class="p-pjlist__fixedlink">
-      案件投稿
-    </a>
   </section>
 </template>
 

@@ -61,6 +61,13 @@ class ProjectController extends Controller
         // return view('project/store');
     }
 
+    public function edit($id)
+    {
+        $user = Auth::user();
+        $project = Project::find($id);
+        return view('project/edit', ["project" => $project, 'user' => $user]);
+    }
+
     // 投稿した案件一覧
     public function postedProjects()
     {

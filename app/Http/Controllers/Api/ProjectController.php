@@ -10,24 +10,51 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
+    // プロジェクトと一緒にユーザーの情報を返すapi
     public function index()
     {
-        // プロジェクトと一緒にユーザーの情報を返すapi
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
-                           ->select('users.name','projects.title','projects.id','projects.type','projects.description')
+                           ->select(
+                               'users.name',
+                               'projects.title',
+                               'projects.id',
+                               'projects.type',
+                               'projects.description',
+                               'projects.lower_price',
+                               'projects.upper_price'
+                              )
                            ->get();
         return $projects;
+    }
+
+    public function update(Request $request)
+    {
+        \Log::info($request->title);
+        \Log::info($request);
+        $project = Project::find($request->id);
+        $project->title = $request->title;
+        $project->type = $request->type;
+        $project->lower_price = $request->lower_price;
+        $project->upper_price = $request->upper_price;
+        $project->description = $request->description;
+        $project->update();
+
+        \Log::info($project);
+
+        return response($project, 201);
     }
 
     public function getLoginUserProject(Request $request) {
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
                            ->where('user_id', $request->user_id)
+                           ->select('users.name','projects.title','projects.id','projects.type','projects.description')
                            ->get();
         \Log::info($projects);
 
         return response($projects, 201);
     }
 
+    // パブリックメッセージを投稿した案件の情報を返すapi
     public function getMessagedProjects(Request $request)
     {
         \Log::info($request);
