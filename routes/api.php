@@ -54,4 +54,4 @@ Route::get('/dms', 'Api\DirectMessageController@show');
 Route::post('/dm', 'Api\DirectMessageController@store');
 
 // プロフィール編集
-Route::patch('/profile', 'Api\ProfileController@update');
+Route::post('/profile', 'Api\ProfileController@update');

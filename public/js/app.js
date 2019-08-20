@@ -1711,12 +1711,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
     return {
       formData: {
+        image: '',
         name: this.user.name,
         email: this.user.email,
         intro: this.user.intro
@@ -1734,15 +1739,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     },
+    fileSelected: function fileSelected(event) {
+      console.log(event);
+      this.formData.image = event.target.files[0];
+    },
     submitData: function submitData() {
       var url = '/api/profile';
-      var data = {
-        id: this.user.id,
-        name: this.formData.name,
-        email: this.formData.email,
-        intro: this.formData.intro
-      };
-      axios.patch(url, data).then(function (res) {
+
+      // 画像ファイルを含めてサーバーに送信するデータを定義
+      var params = new FormData();
+      params.append('file', this.formData.image);
+      params.append('id', this.user.id);
+      params.append('name', this.formData.name);
+      params.append('email', this.formData.email);
+      params.append('intro', this.formData.intro);
+
+      var config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      axios.post(url, params, config).then(function (res) {
         location.href = "/profile";
         alert('プロフィールを更新しました。');
       }).catch(function (error) {
@@ -2532,6 +2545,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2543,10 +2564,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      projects: []
+      projects: [],
+      filter: 2
     };
   },
 
+  computed: {
+    filterType: {
+      set: function set(value) {
+        console.log(value, this.filter);
+        console.log(this.filter);
+        if (this.filter === 2) {
+          console.log("こっち");
+          return true;
+        } else if (value === this.filter) {
+          console.log("どっち");
+          return true;
+        }
+        console.log("aaa");
+        return false;
+      }
+    }
+  },
   methods: {
     getProjects: function getProjects() {
       var _this = this;
@@ -2557,6 +2596,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (error) {
         alert('データの取得に失敗しました。');
       });
+    },
+    sortProjectByType: function sortProjectByType(value) {
+      console.log('bbb');
+      if (this.filter == 2) {
+        return true;
+      } else if (value == this.filter) {
+        return true;
+      }
+      false;
     }
   },
   mounted: function mounted() {
@@ -45808,11 +45856,79 @@ var render = function() {
     [
       _c("h1", { on: { click: _vm.getProjects } }, [_vm._v("案件一覧")]),
       _vm._v(" "),
+      _c("div", { staticClass: "p-pjlist__filter" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.filter,
+              expression: "filter"
+            }
+          ],
+          attrs: { type: "radio", name: "picked", value: "2", id: "all" },
+          domProps: { checked: _vm._q(_vm.filter, "2") },
+          on: {
+            change: function($event) {
+              _vm.filter = "2"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "all" } }, [_vm._v("すべて")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.filter,
+              expression: "filter"
+            }
+          ],
+          attrs: { type: "radio", name: "picked", value: "0", id: "revenue" },
+          domProps: { checked: _vm._q(_vm.filter, "0") },
+          on: {
+            change: function($event) {
+              _vm.filter = "0"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "revenue" } }, [
+          _vm._v("レベニューシェア案件")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.filter,
+              expression: "filter"
+            }
+          ],
+          attrs: { type: "radio", name: "picked", value: "1", id: "reward" },
+          domProps: { checked: _vm._q(_vm.filter, "1") },
+          on: {
+            change: function($event) {
+              _vm.filter = "1"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "reward" } }, [_vm._v("単発案件")])
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.projects, function(project) {
         return _c(
           "ul",
           { key: project.id },
-          [_c("ProjectCard", { attrs: { project: project } })],
+          [
+            _vm.sortProjectByType(project.type)
+              ? _c("ProjectCard", { attrs: { project: project } })
+              : _vm._e()
+          ],
           1
         )
       })
@@ -45851,6 +45967,13 @@ var render = function() {
       }
     },
     [
+      _c("div", { staticClass: "c-profform__formgroup" }, [
+        _c("input", {
+          attrs: { type: "file", mulitple: "multiple" },
+          on: { change: _vm.fileSelected }
+        })
+      ]),
+      _vm._v("\n  " + _vm._s(_vm.formData.image) + "\n  "),
       _c("div", { staticClass: "c-profform__formgroup" }, [
         _c(
           "label",

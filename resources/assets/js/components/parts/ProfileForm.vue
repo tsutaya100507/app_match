@@ -1,6 +1,10 @@
 <template>
   <form @submit.prevent="submitData" class="c-profform">
     <div class="c-profform__formgroup">
+      <input type="file" @change="fileSelected" mulitple="multiple">
+    </div>
+    {{formData.image}}
+    <div class="c-profform__formgroup">
       <label for="name" class="c-profform__label">ユーザー名</label>
       <p v-if="errors.has('title')" class="p-profform__alert">
         {{ errors.first('title') }}
@@ -27,6 +31,7 @@ export default {
   data() {
     return {
       formData: {
+        image: '',
         name: this.user.name,
         email: this.user.email,
         intro: this.user.intro,
@@ -41,15 +46,23 @@ export default {
         }
       })
     },
+    fileSelected(event) {
+      console.log(event)
+      this.formData.image = event.target.files[0]
+    },
     submitData() {
       const url  = '/api/profile'
-      const data = {
-        id: this.user.id,
-        name: this.formData.name,
-        email: this.formData.email,
-        intro: this.formData.intro
-      }
-      axios.patch(url, data)
+      
+      // 画像ファイルを含めてサーバーに送信するデータを定義
+      const params = new FormData();
+      params.append('file',this.formData.image)
+      params.append('id', this.user.id)
+      params.append('name', this.formData.name)
+      params.append('email', this.formData.email)
+      params.append('intro', this.formData.intro)
+      
+      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      axios.post(url, params, config)
       .then((res)    => { 
         location.href = "/profile" 
         alert('プロフィールを更新しました。')
