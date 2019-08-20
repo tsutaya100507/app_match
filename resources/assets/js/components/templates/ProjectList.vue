@@ -1,8 +1,14 @@
 <template>
   <section class="p-pjlist">
     <h1 v-on:click="getProjects">案件一覧</h1>
+    <input type="radio" name="picked" value=2 v-model="filter" id="all">
+    <label for="all">すべて</label>
+    <input type="radio" name="picked" value=0 v-model="filter" id="revenue">レベニューシェア案件
+    <label for="revenue"></label>
+    <input type="radio" name="picked" value=1 v-model="filter" id="reward">単発案件
+    <label for="reward"></label>
     <ul v-for="project in projects" :key="project.id">
-      <ProjectCard :project="project" />
+      <ProjectCard :project="project" v-if="getfiter(project.type)"/>
     </ul> 
   </section>
 </template>
@@ -18,7 +24,25 @@ export default {
   },
   data() {
     return {
-      projects: []
+      projects: [],
+      filter: 2
+    }
+  },
+  computed: {
+    filterType: {
+      set: function(value) {
+        console.log(value,this.filter)
+        console.log(this.filter)
+      if (this.filter === 2) {
+        console.log("こっち")
+        return true
+      } else if (value === this.filter) {
+        console.log("どっち")
+        return true
+      }
+      console.log("aaa")
+      return false
+    }
     }
   },
   methods: {
@@ -31,6 +55,18 @@ export default {
       .catch((error) => {
         alert('データの取得に失敗しました。')
       })
+    },
+    changeFilter() {
+      this.filter = 1
+    },
+    getfiter(value) {
+      console.log('bbb')
+      if (this.filter == 2) {
+        return true
+      } else if(value == this.filter) {
+        return true
+      }
+      false
     }
   },
   mounted() {
