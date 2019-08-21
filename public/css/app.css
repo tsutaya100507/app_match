@@ -8173,6 +8173,116 @@ button.close {
   text-decoration: none;
 }
 
+.header__menu__drawer {
+  position: relative;
+}
+
+.header__menu--unshown {
+  display: none;
+}
+
+.header__menu__open {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+  vertical-align: middle;
+  margin: 25px;
+}
+
+.header__menu__open span, .header__menu__open span:before, .header__menu__open span:after {
+  position: absolute;
+  height: 3px;
+  width: 25px;
+  border-radius: 3px;
+  background: #555;
+  display: block;
+  content: '';
+  cursor: pointer;
+}
+
+.header__menu__open span:before {
+  bottom: -8px;
+}
+
+.header__menu__open span:after {
+  bottom: -16px;
+}
+
+/*閉じる用の薄黒箇所*/
+.header__menu__close {
+  display: none;
+  position: fixed;
+  z-index: 99;
+  top: 70px;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+#nav-content {
+  overflow: auto;
+  position: fixed;
+  top: 70px;
+  right: 0;
+  z-index: 9999;
+  width: 90%;
+  max-width: 330px;
+  height: 100%;
+  padding: 30px;
+  background: rgba(100, 98, 98, 0.9);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  -webkit-transform: translateX(120%);
+  transform: translateX(120%);
+}
+
+#nav-input:checked ~ #nav-close {
+  display: block;
+  opacity: .5;
+}
+
+#nav-input:checked ~ #nav-content {
+  -webkit-transform: translateX(0%);
+  transform: translateX(20%);
+  -webkit-box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+          box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+}
+
+.header__menu__wrapper {
+  display: none;
+  display: -moz-flex;
+  display: -o-flex;
+  display: -ms-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -moz-flex-direction: row;
+  -o-flex-direction: row;
+  -ms-flex-direction: row;
+}
+
+.header__item {
+  font-size: 18px;
+  color: #FFF;
+  letter-spacing: 3px;
+  line-height: 2;
+}
+
+@media (max-width: 580px) {
+  .header__menu {
+    display: none;
+  }
+  .header__menu__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
 .container {
   padding: 0;
   width: 100%;
@@ -8208,6 +8318,10 @@ button.close {
 .c-pjcard:hover {
   -webkit-box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.c-pjcard p {
+  word-break: break-all;
 }
 
 .c-pjcard > a {
