@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PostSent;
 
 class MessageController extends Controller
 {
@@ -33,6 +36,9 @@ class MessageController extends Controller
                         ->select('messages.body', 'users.name')
                         ->get();
         \Log::info($messages);
+        
+        $user = User::find($request->user_id);
+        Mail::to('tyu100507@gmail.com')->send(new PostSent($user));
         return $messages;
     }
 }
