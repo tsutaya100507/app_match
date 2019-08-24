@@ -15,9 +15,7 @@
     @else
 
         <li>
-          <a href="/profile" role="button">
-            マイページへ<span class="caret"></span>
-          </a>
+          <a href="/profile" role="button">マイページへ</a>
         <li>
           <a href="/project/create">案件投稿</a>
         </li>
@@ -35,35 +33,6 @@
       </li>
     @endif
   </ul>
-
-  {{-- <a href="#g_menu" class="header__menu__humburger">
-    <span></span>
-  </a>
-
-  <div id="g_menu">
-      <div id="close" class="btn"><a href="#">×</a></div>
-      <ul>
-        
-        <li>
-            <a href="/profile" role="button">
-              マイページへ<span class="caret"></span>
-            </a>
-          </li>
-          <li>
-            <a href="/project/create">案件投稿</a>
-          </li>  
-          <li>
-            <a href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                  ログアウト
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              {{ csrf_field() }}
-            </form>
-          </li>
-      </ul>
-    </div> --}}
 
     <div class="header__menu__wrapper">
         <div id="header__menu__drawer">
