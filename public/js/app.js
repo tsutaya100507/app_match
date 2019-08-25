@@ -44911,10 +44911,7 @@ var render = function() {
         _vm.user.image_path
           ? _c("img", {
               staticClass: "p-mypage__image",
-              attrs: {
-                src: "data:image/jpeg;base64," + _vm.user.image_path,
-                alt: "profile-image"
-              }
+              attrs: { src: _vm.user.image_path, alt: "profile-image" }
             })
           : _c("div", { staticClass: "p-mypage__noimage" }),
         _vm._v(" "),
