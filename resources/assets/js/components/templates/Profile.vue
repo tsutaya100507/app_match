@@ -6,8 +6,8 @@
     <div class="p-mypage__wrapper">
       <h1>マイページ</h1>
       <dl>
-        <img :src="user.image_path" alt="profile-image" class="p-mypage__image" v-if="user.image_path">
-        <div v-else>no image</div>
+        <img :src="'data:image/jpeg;base64,' + user.image_path" alt="profile-image" class="p-mypage__image" v-if="user.image_path">
+        <div v-else  class="p-mypage__noimage"></div>
         <dt>ユーザー名</dt>
         <dd>{{user.name}}</dd>
         <dt>メールアドレス</dt>
