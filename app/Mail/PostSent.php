@@ -22,12 +22,13 @@ class PostSent extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct($user, $room_url)
     {
         \Log::info($user);
         // \Log::info($message);
         // $this->message = $message;
         $this->user = $user;
+        $this->url  = $room_url;
     }
 
     /**
@@ -37,7 +38,9 @@ class PostSent extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.applications.sents');
-
+        return $this->view('emails.applications.sents')
+                    ->with([
+                        'text' => $this->url,
+                    ]);
     }
 }

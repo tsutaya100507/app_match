@@ -1,11 +1,13 @@
 <template>
-  <section class="p-dmrooms">
+  <section class="p-dms">
     <div class="l-sidebar">
       <Sidebar />
     </div>
+    <div class="p-dms__content">
     <h1>DM一覧</h1>
-    <div v-for="room in edited_rooms" :key="room.id">
-      <RoomCard :room="room" />
+      <div v-for="room in edited_rooms" :key="room.id">
+        <RoomCard :room="room" />
+      </div>
     </div>
   </section>
 </template>

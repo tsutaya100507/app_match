@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Application;
+use App\Models\Room;
+use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PostSent;
 
 class ApplicationController extends Controller
 {
@@ -46,9 +50,41 @@ class ApplicationController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info($request);
+
         $application = new Application();
         $application->user_id    = $request->user_id;
         $application->project_id = $request->project_id;
         $application->save();
+
+        \Log::info($request->user_id);
+        \Log::info($request->project_user_id);
+
+        // 同じユーザーの組み合わせで作成されたDMルームを検索する。
+        $room = Room::where('send_user_id', $request->user_id)->where('recieve_user_id', $request->project_user_id)->orWhere('send_user_id', $request->project_user_id)->where('recieve_user_id', $request->user_id)->first();
+
+        \Log::info("room");
+        \Log::info($room);
+
+        if (empty($room))
+        {
+            \Log::info("aaaaaa");
+            $room = new Room();
+            $room->send_user_id    = $request->user_id;
+            $room->recieve_user_id = $request->project_user_id;
+            $room->save();
+        }
+       
+        \Log::info($room);
+
+        $room_url = env('APP_URL', 'http://localhost:3000') . '/dmroom/' . "$room->id";
+
+        \Log::info($room_url);
+
+        $project_user = User::find($request->project_user_id);
+        Mail::to($project_user->email)->send(new PostSent($project_user,$room_url));
+
+        return response($application, 201);
+
     }
 }

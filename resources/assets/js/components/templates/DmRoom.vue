@@ -1,10 +1,10 @@
 <template>
-  <section>
+  <section class="p-dmroom">
   <div v-for="message in messages" :key="message.id">
     <DmCard :message="message" />
   </div>
   <form @submit.prevent="createDm">
-    <textarea name="" id="" cols="30" rows="1" v-model="formData.body"></textarea>
+    <textarea name="" id="" cols="30" rows="2" v-model="formData.body"></textarea>
     <button type="button" v-on:click="createDm">送信</button>
   </form>
   </section>
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       messages: [],
+      partnerName: "",
       formData: {
         body: ""
       },
@@ -29,11 +30,12 @@ export default {
   },
   methods: {
     getDms() {
-      console.log("ssss")
       const url = "/api/dms"
+      console.log(url)
+      console.log(this.room.id)
       axios.get(url, {
         params: {
-          room_id: this.room[0].id
+          room_id: this.room.id
         }
       })
       .then((res) => {
@@ -47,17 +49,30 @@ export default {
       axios.post(url, {
         body: this.formData.body,
         user_id: this.user.id,
-        room_id: this.room[0].id
+        room_id: this.room.id
       })
       .then((res) => {
         console.log(res.data)
         this.messages = res.data
         this.formData.body = ""
       })
+    },
+    getPartnerName() {
+      const url = "/api/dm/get_partner_name"
+      axios.get(url, {
+        params: {
+          user_id: this.user.id,
+          room_id: this.room.id
+        }
+      })
+      .then((res) => {
+        console.log(res.data)
+        this.partnerName = res.data
+      })
     }
   },
   mounted() {
-    console.log("aaaaa")
+    this.getPartnerName()
     this.getDms()
   }
 }

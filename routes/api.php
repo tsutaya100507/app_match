@@ -47,6 +47,9 @@ Route::post('/message', 'Api\MessageController@store');
 // DMのやりとりをするスペースを作成
 Route::post('/room/store', 'Api\RoomController@store');
 
+// dmの相手の名前を取得
+Route::get('/dm/get_partner_name', 'Api\RoomController@getPartnerName');
+
 // DMの一覧を取得
 Route::get('/dms', 'Api\DirectMessageController@show');
 

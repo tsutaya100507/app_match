@@ -1656,6 +1656,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["message"]
@@ -1772,6 +1777,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -2078,6 +2084,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -2128,6 +2136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       messages: [],
+      partnerName: "",
       formData: {
         body: ""
       }
@@ -2138,11 +2147,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getDms: function getDms() {
       var _this = this;
 
-      console.log("ssss");
       var url = "/api/dms";
+      console.log(url);
+      console.log(this.room.id);
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
         params: {
-          room_id: this.room[0].id
+          room_id: this.room.id
         }
       }).then(function (res) {
         console.log(res.data);
@@ -2157,16 +2167,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
         body: this.formData.body,
         user_id: this.user.id,
-        room_id: this.room[0].id
+        room_id: this.room.id
       }).then(function (res) {
         console.log(res.data);
         _this2.messages = res.data;
         _this2.formData.body = "";
       });
+    },
+    getPartnerName: function getPartnerName() {
+      var _this3 = this;
+
+      var url = "/api/dm/get_partner_name";
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
+        params: {
+          user_id: this.user.id,
+          room_id: this.room.id
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        _this3.partnerName = res.data;
+      });
     }
   },
   mounted: function mounted() {
-    console.log("aaaaa");
+    this.getPartnerName();
     this.getDms();
   }
 });
@@ -2182,6 +2206,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__layouts_Sidebar__ = __webpack_require__("./resources/assets/js/components/layouts/Sidebar.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__layouts_Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__layouts_Sidebar__);
+//
 //
 //
 //
@@ -2391,6 +2416,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -2423,6 +2449,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return false;
       }
       return true;
+    },
+    createUrl: function createUrl() {
+      var text = this.project.title + '\n' + location.href;
+      var encodedTxt = encodeURIComponent(text);
+      var url = 'https://twitter.com/intent/tweet?text=' + encodedTxt;
+      return url;
     }
   },
   methods: {
@@ -2446,10 +2478,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     doApply: function doApply() {
       var _this2 = this;
 
+      console.log(this.project.user_id);
       var url = "/api/application/store";
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
         user_id: this.current_user.id,
-        project_id: this.project.id
+        project_id: this.project.id,
+        project_user_id: this.project.user_id
       }).then(function () {
         _this2.wasApplied = true;
       });
@@ -2695,7 +2729,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar__ = __webpack_require__("./resources/assets/js/components/layouts/Sidebar.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar__);
-//
 //
 //
 //
@@ -44795,6 +44828,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
+    { staticClass: "p-dmroom" },
     [
       _vm._l(_vm.messages, function(message) {
         return _c(
@@ -44825,7 +44859,7 @@ var render = function() {
                 expression: "formData.body"
               }
             ],
-            attrs: { name: "", id: "", cols: "30", rows: "1" },
+            attrs: { name: "", id: "", cols: "30", rows: "2" },
             domProps: { value: _vm.formData.body },
             on: {
               input: function($event) {
@@ -44874,10 +44908,12 @@ var render = function() {
       _c("h1", [_vm._v("マイページ")]),
       _vm._v(" "),
       _c("dl", [
-        _c("img", {
-          staticClass: "p-mypage__image",
-          attrs: { src: _vm.user.image_path, alt: "profile-image" }
-        }),
+        _vm.user.image_path
+          ? _c("img", {
+              staticClass: "p-mypage__image",
+              attrs: { src: _vm.user.image_path, alt: "profile-image" }
+            })
+          : _c("div", [_vm._v("no image")]),
         _vm._v(" "),
         _c("dt", [_vm._v("ユーザー名")]),
         _vm._v(" "),
@@ -44980,7 +45016,16 @@ var render = function() {
               on: { click: _vm.doApply }
             },
             [_vm._v("申し込んでみる")]
-          )
+          ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "button button--twitter u-w100 u-fs16",
+          attrs: { href: _vm.createUrl }
+        },
+        [_vm._v("twitterでシェア")]
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -45358,7 +45403,6 @@ var render = function() {
       "div",
       { staticClass: "p-pjapplied__wrapper" },
       [
-        _vm._v("\n    " + _vm._s(_vm.projects) + "\n  "),
         _c("h1", [_vm._v("メッセージした案件一覧")]),
         _vm._v(" "),
         _vm._l(_vm.projects, function(project) {
@@ -45435,7 +45479,9 @@ var render = function() {
           _c("dl", { staticClass: "c-pjcard__note" }, [
             _c("dt", [_vm._v("案件タイプ")]),
             _vm._v(" "),
-            _c("dd", [_vm._v(_vm._s(_vm.project.type))])
+            _vm.project.type == 0
+              ? _c("dd", [_vm._v("レベニューシェア")])
+              : _c("dd", [_vm._v("単発案件")])
           ]),
           _vm._v(" "),
           _vm.isReward
@@ -45490,7 +45536,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n  " + _vm._s(_vm.message) + "\n")])
+  return _c("div", { staticClass: "c-dmcard" }, [
+    _c("img", {
+      staticClass: "c-dmcard__image",
+      attrs: { src: _vm.message.image_path, alt: "" }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "c-dmcard__text" }, [
+      _c("span", { staticClass: "c-dmcard__user" }, [
+        _vm._v(_vm._s(_vm.message.name))
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v(_vm._s(_vm.message.created_at))]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.message.body))])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46120,25 +46181,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "p-dmrooms" },
-    [
-      _c("div", { staticClass: "l-sidebar" }, [_c("Sidebar")], 1),
-      _vm._v(" "),
-      _c("h1", [_vm._v("DM一覧")]),
-      _vm._v(" "),
-      _vm._l(_vm.edited_rooms, function(room) {
-        return _c(
-          "div",
-          { key: room.id },
-          [_c("RoomCard", { attrs: { room: room } })],
-          1
-        )
-      })
-    ],
-    2
-  )
+  return _c("section", { staticClass: "p-dms" }, [
+    _c("div", { staticClass: "l-sidebar" }, [_c("Sidebar")], 1),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "p-dms__content" },
+      [
+        _c("h1", [_vm._v("DM一覧")]),
+        _vm._v(" "),
+        _vm._l(_vm.edited_rooms, function(room) {
+          return _c(
+            "div",
+            { key: room.id },
+            [_c("RoomCard", { attrs: { room: room } })],
+            1
+          )
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

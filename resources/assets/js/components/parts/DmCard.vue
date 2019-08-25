@@ -1,6 +1,11 @@
 <template>
-  <div>
-    {{message}}
+  <div class="c-dmcard">
+    <img :src="message.image_path" alt="" class="c-dmcard__image">
+    <div class="c-dmcard__text">
+      <span class="c-dmcard__user">{{message.name}}</span>
+      <span>{{message.created_at}}</span>
+      <p>{{message.body}}</p>
+    </div>
   </div>
 </template>
 

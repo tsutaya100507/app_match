@@ -3,9 +3,8 @@
     <div class="l-sidebar">
       <Sidebar />
     </div>
-        <div class="p-pjapplied__wrapper">
-      {{projects}}
-    <h1>メッセージした案件一覧</h1>
+    <div class="p-pjapplied__wrapper">
+      <h1>メッセージした案件一覧</h1>
       <ul v-for="project in projects" :key="project.id">
         <li>
           <ProjectCard :project="project">

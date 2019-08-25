@@ -42,14 +42,24 @@
             <div id="nav-content">
                 <ul>
                     <li>
-                        <a href="/profile" role="button" class="header__item">
-                          マイページへ
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/project/create" class="header__item">案件投稿</a>
-                      </li>  
-                      <li>
+                      <a href="/project/create" class="header__item">案件投稿</a>
+                    </li>    
+                    <li>
+                      <a href="/profile" role="button" class="header__item">マイページへ</a>
+                    </li>
+                    <li>
+                      <a href="/profile/posted-projects" class="header__item">投稿案件一覧</a>
+                    </li>
+                    <li>
+                      <a href="/profile/applied-projects" class="header__item">申し込み案件一覧</a>
+                    </li>
+                    <li>
+                      <a href="/profile/public-messages" class="header__item">メッセージ投稿一覧</a>
+                    </li>
+                    <li>
+                      <a href="/profile/dmrooms" class="header__item">dm一覧</a>
+                    </li>
+                    <li>
                         <a href="{{ route('logout') }}"
                               onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();" class="header__item">

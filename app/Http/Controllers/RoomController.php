@@ -11,8 +11,7 @@ class RoomController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $rooms = Room::where('send_user_id', $user->id)->orWhere('recieve_user_id', 
-        $user->id)->get();
+        $rooms = Room::where('send_user_id', $user->id)->orWhere('recieve_user_id', $user->id)->get();
         \Log::info(gettype($rooms));
         
 
@@ -22,17 +21,19 @@ class RoomController extends Controller
             $data[$i]['id'] = $room->id;
             $data[$i]['userName'] = $room->otherUser->name;
             \Log::info($data[$i]['userName']);
-
+            $i++;
         }
-        \Log::info(gettype($data));
         return view('room/index', ['user' => $user, 'rooms' => $rooms, 'edited_rooms' => $data]);
     }
     
     public function show($id)
     {
-        $room = Room::find($id)->get();
+        \Log::info($id);
+        $room = Room::where('id',$id)->first();
         $user = Auth::user();
+        \Log::info("dmroom show");
         \Log::info($room);
         return view('room/show', ['room' => $room, 'user' => $user]);
     }
+
 }

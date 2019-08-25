@@ -38,7 +38,6 @@ class MessageController extends Controller
         \Log::info($messages);
         
         $user = User::find($request->user_id);
-        Mail::to('tyu100507@gmail.com')->send(new PostSent($user));
         return $messages;
     }
 }

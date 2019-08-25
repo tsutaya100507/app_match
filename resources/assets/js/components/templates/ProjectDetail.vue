@@ -24,6 +24,7 @@
     <div class="p-pjdetail__btn">
       <span v-if="wasApplied" class="button button--info u-w100 u-fs16" disalbled>申し込み済み</span>
       <button v-on:click="doApply" v-else class="button button--primary u-w100 u-fs16">申し込んでみる</button>
+      <a :href="createUrl" class="button button--twitter u-w100 u-fs16">twitterでシェア</a>
     </div>
     <section class="p-pjdetail__message__area">
         <h2 class="p-pjdetail__message__title">メッセージ</h2>
@@ -71,6 +72,12 @@ export default {
         return false
       }
       return true
+    },
+    createUrl() {
+      const text = `${this.project.title}\n${location.href}`
+      const encodedTxt = encodeURIComponent(text)
+      const url = `https://twitter.com/intent/tweet?text=${encodedTxt}`
+      return url
     }
   },
   methods: {
@@ -79,7 +86,7 @@ export default {
       axios.get(url,{
         params: {
           user_id: this.current_user.id,
-          project_id: this.project.id}
+          project_id: this.project.id},
       })
       .then((res) => {
         console.log(res)
@@ -90,10 +97,12 @@ export default {
     },
     // 案件への申し込み
     doApply() {
+      console.log(this.project.user_id)
       const url = "/api/application/store"
       axios.post(url, {
         user_id: this.current_user.id,
-        project_id: this.project.id
+        project_id: this.project.id,
+        project_user_id: this.project.user_id
       })
       .then(() => {
         this.wasApplied = true

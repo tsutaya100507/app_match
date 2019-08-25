@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
-    // プロジェクトと一緒にユーザーの情報を返すapi
+    // 案件と一緒にユーザーの情報を返すapi
     public function index()
     {
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
@@ -27,6 +27,7 @@ class ProjectController extends Controller
         return $projects;
     }
 
+    // 案件の更新
     public function update(Request $request)
     {
         \Log::info($request->title);
@@ -44,6 +45,7 @@ class ProjectController extends Controller
         return response($project, 201);
     }
 
+    // ログインユーザーの投稿した案件の一覧を取得
     public function getLoginUserProject(Request $request) {
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
                            ->where('user_id', $request->user_id)
@@ -72,15 +74,16 @@ class ProjectController extends Controller
                            ->unique();
         \Log::info($projects);
         
-        // 取得した案件レコードに紐づく最初のパブリックメッセージを追加して新たな配列を作成。
+        // 取得した案件レコードに紐づく最新のパブリックメッセージを追加して新たな配列を作成。
         $new_projects = array();
         foreach($projects as $project)
         {
             $message = Message::join('users', 'messages.user_id', '=', 'users.id')
                               ->where('project_id', $project->id)
-                              ->select('messages.body', 'users.name')
+                              ->select('messages.body', 'messages.created_at', 'users.name')
+                              ->latest()
                               ->first();
-            \Log::info($message);
+
             $project['message'] = $message->body;
             $project['user_name'] = $message->name;
             \Log::info($project);

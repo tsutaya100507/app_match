@@ -25,9 +25,9 @@ class ProjectController extends Controller
         $user = Auth::user();
 
         // 同じユーザーの組み合わせで作成されたDMルームを検索する。
-        $match1 = ['send_user_id' => $user->id, 'recieve_user_id' => $project[0]->user_id];
-        $match2 = ['send_user_id' => $project[0]->user_id, 'recieve_user_id' => $user->id];
-        $room = Room::where($match1)->orWhere($match2)->get();
+        // $match1 = ['send_user_id' => $user->id, 'recieve_user_id' => $project[0]->user_id];
+        // $match2 = ['send_user_id' => $project[0]->user_id, 'recieve_user_id' => $user->id];
+        $room = Room::where('send_user_id', $user->id)->where('recieve_user_id', $project[0]->user_id)->orWhere('send_user_id', $project[0]->user_id)->where('recieve_user_id', $user->id)->get();
         \Log::info($room);
         \Log::info($project);
         return view('project/show', ['project' => $project, 'user' => $user, 'room' => $room]);

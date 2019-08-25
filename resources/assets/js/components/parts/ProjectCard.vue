@@ -7,7 +7,8 @@
       <div class="c-pjcard__terms">
         <dl class="c-pjcard__note">
           <dt>案件タイプ</dt>
-          <dd>{{project.type}}</dd>
+          <dd v-if="project.type == 0">レベニューシェア</dd>
+          <dd v-else>単発案件</dd>
         </dl>
         <dl class="c-pjcard__note" v-if="isReward">
           <dt>報酬</dt>

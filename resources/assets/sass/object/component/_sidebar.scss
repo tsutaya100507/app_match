@@ -18,3 +18,9 @@
     text-decoration: none;
   }
 }
+
+@media(max-width: 580px) {
+  .c-sidebar {
+    display: none;
+  }
+}
