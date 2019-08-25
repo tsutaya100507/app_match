@@ -8544,6 +8544,13 @@ textarea {
   padding: 20px;
 }
 
+.p-mypage__image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 30px;
+}
+
 .p-dmrooms {
   display: -webkit-box;
   display: -ms-flexbox;

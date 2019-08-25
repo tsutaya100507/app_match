@@ -2203,6 +2203,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -44873,6 +44874,11 @@ var render = function() {
       _c("h1", [_vm._v("マイページ")]),
       _vm._v(" "),
       _c("dl", [
+        _c("img", {
+          staticClass: "p-mypage__image",
+          attrs: { src: _vm.user.image_path, alt: "profile-image" }
+        }),
+        _vm._v(" "),
         _c("dt", [_vm._v("ユーザー名")]),
         _vm._v(" "),
         _c("dd", [_vm._v(_vm._s(_vm.user.name))]),
