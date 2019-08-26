@@ -8644,6 +8644,14 @@ textarea {
   padding: 20px;
 }
 
+.p-auth__content {
+  position: static;
+}
+
+.p-auth__static {
+  position: static;
+}
+
 .u-w100 {
   width: 300px;
 }
