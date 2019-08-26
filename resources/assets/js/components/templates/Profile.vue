@@ -13,7 +13,7 @@
         <dt>メールアドレス</dt>
         <dd>{{user.email}}</dd>
         <dt>職歴等</dt>
-        <dd>{{user.intro}}</dd>
+        <dd class="p-mypage__intro">{{user.intro}}</dd>
       </dl>
       <a href="/profile/edit" class="button button--primary">プロフィールを編集する</a>
     </div>

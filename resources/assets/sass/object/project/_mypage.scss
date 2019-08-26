@@ -1,6 +1,9 @@
 .p-mypage {
   display: flex;
   min-height: 100vh;
+  dt {
+    margin-top: 10px;
+  }
 }
 
 .p-mypage__sidebar {
@@ -29,4 +32,7 @@
   background-image: url('../../../images/welcome.jpg');
 }
 
-
+.p-mypage__intro {
+  white-space: pre-wrap;
+  word-wrap:break-word;
+}

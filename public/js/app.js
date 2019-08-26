@@ -44925,7 +44925,9 @@ var render = function() {
         _vm._v(" "),
         _c("dt", [_vm._v("職歴等")]),
         _vm._v(" "),
-        _c("dd", [_vm._v(_vm._s(_vm.user.intro))])
+        _c("dd", { staticClass: "p-mypage__intro" }, [
+          _vm._v(_vm._s(_vm.user.intro))
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -44966,7 +44968,11 @@ var render = function() {
     _c("dl", { staticClass: "p-pjdetail__note" }, [
       _c("dt", [_vm._v("案件詳細")]),
       _vm._v(" "),
-      _c("dd", [_c("p", [_vm._v(_vm._s(_vm.project.description))])])
+      _c("dd", [
+        _c("p", { staticClass: "p-pjdetail__desc" }, [
+          _vm._v(_vm._s(_vm.project.description))
+        ])
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "p-pjdetail__terms" }, [
@@ -45549,7 +45555,9 @@ var render = function() {
       _vm._v(" "),
       _c("span", [_vm._v(_vm._s(_vm.message.created_at))]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.message.body))])
+      _c("p", { staticClass: "c-dmcard__message" }, [
+        _vm._v(_vm._s(_vm.message.body))
+      ])
     ])
   ])
 }

@@ -3,7 +3,7 @@
     <h1 class="p-pjdetail__title">{{ project.title }}</h1>
     <dl class="p-pjdetail__note">
       <dt>案件詳細</dt>
-      <dd><p>{{ project.description }}</p></dd>
+      <dd><p class="p-pjdetail__desc">{{ project.description }}</p></dd>
     </dl>
     <div class="p-pjdetail__terms">
       <dl class="p-pjdetail__note">

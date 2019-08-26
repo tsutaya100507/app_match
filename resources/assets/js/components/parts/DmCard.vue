@@ -4,7 +4,7 @@
     <div class="c-dmcard__text">
       <span class="c-dmcard__user">{{message.name}}</span>
       <span>{{message.created_at}}</span>
-      <p>{{message.body}}</p>
+      <p class="c-dmcard__message">{{message.body}}</p>
     </div>
   </div>
 </template>
