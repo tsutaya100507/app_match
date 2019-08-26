@@ -8563,6 +8563,12 @@ textarea {
 
 .p-pjdetail__btn {
   text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 .p-pjdetail__desc {

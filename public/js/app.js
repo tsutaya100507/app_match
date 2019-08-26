@@ -2417,6 +2417,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2437,19 +2441,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   computed: {
+    // DMをやりとりするスペースが既にでいているかチェック
     isRoom: function isRoom() {
+      console.log(this.current_user.id);
+      console.log(this.project.user_id);
       if (this.room.length > 0) {
         return true;
       } else {
         return false;
       }
     },
+
+    // レベニューシェア案件か単発案件かチェック
     isReward: function isReward() {
       if (this.project.type === 0) {
         return false;
       }
       return true;
     },
+
+    // twitterシェア用のurlを生成
     createUrl: function createUrl() {
       var text = this.project.title + '\n' + location.href;
       var encodedTxt = encodeURIComponent(text);
@@ -44995,34 +45006,42 @@ var render = function() {
         _vm._v(" "),
         _c("dd", [_vm._v(_vm._s(_vm.project.name))]),
         _vm._v(" "),
-        _vm.isRoom
-          ? _c("a", { attrs: { href: "/dmroom/" + _vm.room[0].id } }, [
-              _vm._v("DMページへ")
+        this.current_user.id != this.project.user_id
+          ? _c("div", [
+              _vm.isRoom
+                ? _c("a", { attrs: { href: "/dmroom/" + _vm.room[0].id } }, [
+                    _vm._v("DMページへ")
+                  ])
+                : _c("button", { on: { click: _vm.createRoom } }, [
+                    _vm._v("案件投稿者へのDMを送る")
+                  ])
             ])
-          : _c("button", { on: { click: _vm.createRoom } }, [
-              _vm._v("案件投稿者へのDMを送る")
-            ])
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "p-pjdetail__btn" }, [
-      _vm.wasApplied
-        ? _c(
-            "span",
-            {
-              staticClass: "button button--info u-w100 u-fs16",
-              attrs: { disalbled: "" }
-            },
-            [_vm._v("申し込み済み")]
-          )
-        : _c(
-            "button",
-            {
-              staticClass: "button button--primary u-w100 u-fs16",
-              on: { click: _vm.doApply }
-            },
-            [_vm._v("申し込んでみる")]
-          ),
+      this.current_user.id != this.project.user_id
+        ? _c("div", [
+            _vm.wasApplied
+              ? _c(
+                  "span",
+                  {
+                    staticClass: "button button--info u-w100 u-fs16",
+                    attrs: { disalbled: "" }
+                  },
+                  [_vm._v("申し込み済み")]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "button button--primary u-w100 u-fs16",
+                    on: { click: _vm.doApply }
+                  },
+                  [_vm._v("申し込んでみる")]
+                )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "a",

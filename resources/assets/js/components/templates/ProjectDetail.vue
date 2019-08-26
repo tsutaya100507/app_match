@@ -17,13 +17,17 @@
       <dl class="p-pjdetail__note">
         <dt>投稿者</dt>
         <dd>{{project.name}}</dd>
-        <a :href="'/dmroom/' + room[0].id" v-if="isRoom">DMページへ</a>
-        <button v-on:click="createRoom" v-else>案件投稿者へのDMを送る</button>
+        <div v-if="this.current_user.id != this.project.user_id">
+          <a :href="'/dmroom/' + room[0].id" v-if="isRoom">DMページへ</a>
+          <button v-on:click="createRoom" v-else>案件投稿者へのDMを送る</button>
+        </div>      
       </dl>
     </div>
     <div class="p-pjdetail__btn">
-      <span v-if="wasApplied" class="button button--info u-w100 u-fs16" disalbled>申し込み済み</span>
-      <button v-on:click="doApply" v-else class="button button--primary u-w100 u-fs16">申し込んでみる</button>
+      <div v-if="this.current_user.id != this.project.user_id">
+        <span v-if="wasApplied" class="button button--info u-w100 u-fs16" disalbled>申し込み済み</span>
+        <button v-on:click="doApply" v-else class="button button--primary u-w100 u-fs16">申し込んでみる</button>
+      </div>
       <a :href="createUrl" class="button button--twitter u-w100 u-fs16">twitterでシェア</a>
     </div>
     <section class="p-pjdetail__message__area">
@@ -60,19 +64,24 @@ export default {
     }
   },
   computed: {
+    // DMをやりとりするスペースが既にでいているかチェック
     isRoom() {
+      console.log(this.current_user.id)
+      console.log(this.project.user_id)
       if (this.room.length > 0) {
         return true
       } else {
         return false
       }
     },
+    // レベニューシェア案件か単発案件かチェック
     isReward() {
       if (this.project.type === 0) {
         return false
       }
       return true
     },
+    // twitterシェア用のurlを生成
     createUrl() {
       const text = `${this.project.title}\n${location.href}`
       const encodedTxt = encodeURIComponent(text)
