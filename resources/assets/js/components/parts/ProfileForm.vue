@@ -3,7 +3,6 @@
     <div class="c-profform__formgroup">
       <input type="file" @change="fileSelected" mulitple="multiple">
     </div>
-    {{formData.image}}
     <div class="c-profform__formgroup">
       <label for="name" class="c-profform__label">ユーザー名</label>
       <p v-if="errors.has('title')" class="p-profform__alert">
@@ -16,11 +15,11 @@
       <input name="email" v-model="formData.email" v-validate="'required'" class="c-profform__input">
     </div>
     <div class="c-profform__formgroup">
-      <label for="intro" class="c-profform__label">職歴等</label>
+      <label for="intro" class="c-profform__label">自己紹介</label>
       <textarea name="intro" id="" rows="10" v-model="formData.intro"></textarea>
     </div>
     <div class="c-profform__formgroup">
-      <button type="button" v-on:click="validateData" class="c-profform__postbtn">案件投稿</button>
+      <button type="button" v-on:click="validateData" class="c-profform__postbtn">プロフィールの更新</button>
     </div>
   </form>
 </template>
@@ -31,7 +30,7 @@ export default {
   data() {
     return {
       formData: {
-        image: '',
+        image: this.user.image_path,
         name: this.user.name,
         email: this.user.email,
         intro: this.user.intro,

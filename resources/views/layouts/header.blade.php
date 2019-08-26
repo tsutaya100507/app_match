@@ -42,6 +42,12 @@
             <div id="nav-content">
                 <ul>
                     <li>
+                      <a href="/login" class="header__item">ログイン</a>
+                    </li>
+                    <li>
+                      <a href="/register" class="header__item">新規登録</a>
+                    </li>
+                    <li>
                       <a href="/project/create" class="header__item">案件投稿</a>
                     </li>    
                     <li>

@@ -44,4 +44,9 @@
   }
 }
 
-
+@media(max-width: 580px) {
+  .c-pjcard__terms {
+    display: flex;
+    flex-direction: column;
+  }
+}

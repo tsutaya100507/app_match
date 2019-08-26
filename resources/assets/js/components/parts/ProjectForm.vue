@@ -98,7 +98,10 @@ export default {
         user_id: this.user.id,
       }
       axios.post('/project/store', data)
-        .then((res) => { location.href = "/"  })
+        .then((res) => {
+          alert('投稿が完了しました。')
+          location.href = "/"
+        })
         .catch((error) => { alert("投稿が失敗しました。") })
     }
   }

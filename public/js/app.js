@@ -1719,14 +1719,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
     return {
       formData: {
-        image: '',
+        image: this.user.image_path,
         name: this.user.name,
         email: this.user.email,
         intro: this.user.intro
@@ -1913,6 +1912,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         user_id: this.user.id
       };
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.patch('/api/project/update', data).then(function (res) {
+        alert('内容を更新しました。');
         location.href = "/profile/posted-projects";
       }).catch(function (error) {
         alert("編集が失敗しました。");
@@ -2031,6 +2031,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         user_id: this.user.id
       };
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/project/store', data).then(function (res) {
+        alert('投稿が完了しました。');
         location.href = "/";
       }).catch(function (error) {
         alert("投稿が失敗しました。");
@@ -45324,8 +45325,40 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("main", { staticClass: "main" }, [
-      _c("div", { staticClass: "welcomt-container" }, [
-        _c("div", { staticClass: "welcome-header" })
+      _c("div", { staticClass: "welcome-header" }, [
+        _c("p", [_vm._v("サービスを立ち上げたい方")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("エンジニアを"),
+          _c("br"),
+          _vm._v("気軽に募集してみませんか？")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Matchは、開発を発注したい人と、"),
+          _c("br"),
+          _vm._v("エンジニアのマッチングアプリです。")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-welcome__btn" }, [
+        _c(
+          "a",
+          {
+            staticClass: "button button--primary u-w200 u-fs16",
+            attrs: { href: "/login" }
+          },
+          [_vm._v("ログイン")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "button button--twitter u-w200 u-fs16",
+            attrs: { href: "/register" }
+          },
+          [_vm._v("新規登録")]
+        )
       ])
     ])
   }
@@ -46067,7 +46100,7 @@ var render = function() {
           on: { change: _vm.fileSelected }
         })
       ]),
-      _vm._v("\n  " + _vm._s(_vm.formData.image) + "\n  "),
+      _vm._v(" "),
       _c("div", { staticClass: "c-profform__formgroup" }, [
         _c(
           "label",
@@ -46150,7 +46183,7 @@ var render = function() {
         _c(
           "label",
           { staticClass: "c-profform__label", attrs: { for: "intro" } },
-          [_vm._v("職歴等")]
+          [_vm._v("自己紹介")]
         ),
         _vm._v(" "),
         _c("textarea", {
@@ -46183,7 +46216,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.validateData }
           },
-          [_vm._v("案件投稿")]
+          [_vm._v("プロフィールの更新")]
         )
       ])
     ]

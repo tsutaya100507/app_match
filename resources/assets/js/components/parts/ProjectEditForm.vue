@@ -80,7 +80,10 @@ export default {
         user_id: this.user.id
       }
       axios.patch('/api/project/update', data)
-        .then((res) => { location.href = "/profile/posted-projects"  })
+        .then((res) => {
+          alert('内容を更新しました。')
+          location.href = "/profile/posted-projects"
+        })
         .catch((error) => { alert("編集が失敗しました。") })
     }
   }

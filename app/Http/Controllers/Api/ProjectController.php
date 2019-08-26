@@ -21,8 +21,10 @@ class ProjectController extends Controller
                                'projects.type',
                                'projects.description',
                                'projects.lower_price',
-                               'projects.upper_price'
+                               'projects.upper_price',
+                               'projects.created_at'
                               )
+                           ->orderBy('created_at', 'desc')
                            ->get();
         return $projects;
     }
@@ -49,7 +51,15 @@ class ProjectController extends Controller
     public function getLoginUserProject(Request $request) {
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
                            ->where('user_id', $request->user_id)
-                           ->select('users.name','projects.title','projects.id','projects.type','projects.description')
+                           ->select('users.name',
+                                    'projects.title',
+                                    'projects.id',
+                                    'projects.type',
+                                    'projects.description',
+                                    'projects.lower_price',
+                                    'projects.upper_price',
+                                    'projects.created_at')
+                           ->orderBy('created_at', 'desc')
                            ->get();
         \Log::info($projects);
 
