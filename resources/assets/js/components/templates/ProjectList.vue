@@ -2,12 +2,18 @@
   <section class="p-pjlist">
     <h1 v-on:click="getProjects">案件一覧</h1>
     <div class="p-pjlist__filter">
-      <input type="radio" name="picked" value=2 v-model="filter" id="all">
-      <label for="all">すべて</label>
-      <input type="radio" name="picked" value=0 v-model="filter" id="revenue">
-      <label for="revenue">レベニューシェア案件</label>
-      <input type="radio" name="picked" value=1 v-model="filter" id="reward">
-      <label for="reward">単発案件</label>
+      <div>
+        <input type="radio" name="picked" value=2 v-model="filter" id="all">
+        <label for="all">すべて</label>
+      </div>
+      <div>
+        <input type="radio" name="picked" value=0 v-model="filter" id="revenue">
+        <label for="revenue">レベニューシェア案件</label>
+      </div>
+      <div>
+        <input type="radio" name="picked" value=1 v-model="filter" id="reward">
+        <label for="reward">単発案件</label>
+      </div>
     </div>
     <ul v-for="project in projects" :key="project.id">
       <ProjectCard :project="project" v-if="sortProjectByType(project.type)"/>

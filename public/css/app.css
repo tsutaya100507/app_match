@@ -8580,11 +8580,26 @@ textarea {
 }
 
 .p-pjlist__filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin: 30px 0;
 }
 
 .p-pjlist__filter label {
   margin-right: 15px;
+}
+
+@media (max-width: 580px) {
+  .p-pjlist__filter {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .p-pjdetail {
