@@ -57,7 +57,6 @@ export default {
     getProjects() {
       axios.get('/api/projects')
       .then((res) => {
-        console.log(res.data)
         this.projects = res.data
       })
       .catch((error) => {
@@ -65,7 +64,6 @@ export default {
       })
     },
     sortProjectByType(value) {
-      console.log('bbb')
       if (this.filter == 2) {
         return true
       } else if(value == this.filter) {

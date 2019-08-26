@@ -11,6 +11,7 @@ use App\Mail\PostSent;
 
 class MessageController extends Controller
 {
+    // パブリックメッセージの一覧を取得
     public function show($project_id)
     {
         \Log::info($project_id);
@@ -19,10 +20,11 @@ class MessageController extends Controller
                         ->join('users', 'messages.user_id', '=', 'users.id')
                         ->select('messages.body', 'users.name')
                         ->get();
-        \Log::info($messages);
+
         return $messages;   
     }
 
+    // パブリックメッセージの投稿
     public function store(Request $request)
     {
         $message = new Message();
@@ -35,7 +37,6 @@ class MessageController extends Controller
                         ->join('users', 'messages.user_id', '=', 'users.id')
                         ->select('messages.body', 'users.name')
                         ->get();
-        \Log::info($messages);
         
         $user = User::find($request->user_id);
         return $messages;

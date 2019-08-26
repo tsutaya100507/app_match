@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     getMessagedProjects() {
-      console.log(this.user.id)
       const url = "/api/project/messaged"
       axios.get(url, {
         params: {

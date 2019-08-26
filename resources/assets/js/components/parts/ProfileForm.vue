@@ -46,7 +46,6 @@ export default {
       })
     },
     fileSelected(event) {
-      console.log(event)
       this.formData.image = event.target.files[0]
     },
     submitData() {

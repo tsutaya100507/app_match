@@ -66,8 +66,6 @@ export default {
   computed: {
     // DMをやりとりするスペースが既にでいているかチェック
     isRoom() {
-      console.log(this.current_user.id)
-      console.log(this.project.user_id)
       if (this.room.length > 0) {
         return true
       } else {
@@ -98,7 +96,6 @@ export default {
           project_id: this.project.id},
       })
       .then((res) => {
-        console.log(res)
         if (res.data.length > 0) {
           this.wasApplied = true
         }
@@ -106,7 +103,6 @@ export default {
     },
     // 案件への申し込み
     doApply() {
-      console.log(this.project.user_id)
       const url = "/api/application/store"
       axios.post(url, {
         user_id: this.current_user.id,
@@ -120,7 +116,6 @@ export default {
     // 案件に紐づくパブリックメッセージの取得
     getMessages() {
       const url = `/api/project/${this.project.id}/messages`
-      console.log(url)
       axios.get(url)
         .then((res) => {
           this.messages = res.data
@@ -137,19 +132,15 @@ export default {
       .then((res) => {
         this.formData.message = ""
         this.messages = res.data
-        console.log(this.messages)
       })
     },
     createRoom() {
       const url = "/api/room/store"
-      console.log(this.current_user.id)
-      console.log(this.project.user_id)
       axios.post(url, {
         send_user_id: this.current_user.id,
         recieve_user_id: this.project.user_id,
       })
       .then((res) => {
-        console.log(res.data) 
         location.href = "/dmroom/" + res.data.id })
     }
   },

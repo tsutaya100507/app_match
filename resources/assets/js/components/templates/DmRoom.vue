@@ -1,5 +1,6 @@
 <template>
   <section class="p-dmroom">
+  <div class="p-dmroom__partner">{{partnerName}}</div>
   <div v-for="message in messages" :key="message.id">
     <DmCard :message="message" />
   </div>
@@ -31,28 +32,23 @@ export default {
   methods: {
     getDms() {
       const url = "/api/dms"
-      console.log(url)
-      console.log(this.room.id)
       axios.get(url, {
         params: {
           room_id: this.room.id
         }
       })
       .then((res) => {
-        console.log(res.data)
         this.messages = res.data
       })
     },
     createDm() {
       const url = "/api/dm"
-      console.log(this.formData.body)
       axios.post(url, {
         body: this.formData.body,
         user_id: this.user.id,
         room_id: this.room.id
       })
       .then((res) => {
-        console.log(res.data)
         this.messages = res.data
         this.formData.body = ""
       })
@@ -66,7 +62,6 @@ export default {
         }
       })
       .then((res) => {
-        console.log(res.data)
         this.partnerName = res.data
       })
     }

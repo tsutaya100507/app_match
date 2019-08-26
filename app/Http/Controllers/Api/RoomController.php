@@ -10,6 +10,7 @@ use App\User;
 
 class RoomController extends Controller
 {
+    // DMのやりとりをするスペースを作成
     public function store(Request $request)
     {
         $room = new Room();
@@ -20,13 +21,12 @@ class RoomController extends Controller
         return response($room, 201);
     }
 
+    // DMのやり取りをする相手ての名前を取得
     public function getPartnerName(Request $request)
     {
-        \Log::info($request);
 
         $room = Room::where('id', $request->room_id)->first();
 
-        \Log::info($room);
 
         if ($room->send_user_id == $request->user_id)
         {
@@ -35,11 +35,7 @@ class RoomController extends Controller
             $partnerUserId = $room->send_user_id;
         }
 
-        \Log::info($partnerUserId);
-
         $user = User::where('id', $partnerUserId)->first();
-
-        \Log::info($user);
 
         return $user->name;
     }

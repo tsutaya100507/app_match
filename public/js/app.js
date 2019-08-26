@@ -1744,7 +1744,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     fileSelected: function fileSelected(event) {
-      console.log(event);
       this.formData.image = event.target.files[0];
     },
     submitData: function submitData() {
@@ -1898,10 +1897,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     submitData: function submitData() {
-      console.log(this.formData.title);
-      console.log(this.formData.content);
-      console.log(this.formData.type);
-      console.log(this.project.id);
       var data = {
         id: this.project.id,
         title: this.formData.title,
@@ -2096,9 +2091,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['user', 'rooms', 'edited_rooms'],
   components: {
     RoomCard: __WEBPACK_IMPORTED_MODULE_1__parts_RoomCard___default.a, Sidebar: __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar___default.a
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -2113,6 +2105,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_DmCard__ = __webpack_require__("./resources/assets/js/components/parts/DmCard.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_DmCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_DmCard__);
+//
 //
 //
 //
@@ -2149,14 +2142,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       var url = "/api/dms";
-      console.log(url);
-      console.log(this.room.id);
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
         params: {
           room_id: this.room.id
         }
       }).then(function (res) {
-        console.log(res.data);
         _this.messages = res.data;
       });
     },
@@ -2164,13 +2154,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       var url = "/api/dm";
-      console.log(this.formData.body);
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
         body: this.formData.body,
         user_id: this.user.id,
         room_id: this.room.id
       }).then(function (res) {
-        console.log(res.data);
         _this2.messages = res.data;
         _this2.formData.body = "";
       });
@@ -2185,7 +2173,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           room_id: this.room.id
         }
       }).then(function (res) {
-        console.log(res.data);
         _this3.partnerName = res.data;
       });
     }
@@ -2280,7 +2267,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_ProjectCard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar__ = __webpack_require__("./resources/assets/js/components/layouts/Sidebar.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__layouts_Sidebar__);
-//
 //
 //
 //
@@ -2444,8 +2430,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {
     // DMをやりとりするスペースが既にでいているかチェック
     isRoom: function isRoom() {
-      console.log(this.current_user.id);
-      console.log(this.project.user_id);
       if (this.room.length > 0) {
         return true;
       } else {
@@ -2479,7 +2463,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           user_id: this.current_user.id,
           project_id: this.project.id }
       }).then(function (res) {
-        console.log(res);
         if (res.data.length > 0) {
           _this.wasApplied = true;
         }
@@ -2490,7 +2473,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     doApply: function doApply() {
       var _this2 = this;
 
-      console.log(this.project.user_id);
       var url = "/api/application/store";
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
         user_id: this.current_user.id,
@@ -2506,7 +2488,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       var url = '/api/project/' + this.project.id + '/messages';
-      console.log(url);
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (res) {
         _this3.messages = res.data;
       });
@@ -2524,18 +2505,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (res) {
         _this4.formData.message = "";
         _this4.messages = res.data;
-        console.log(_this4.messages);
       });
     },
     createRoom: function createRoom() {
       var url = "/api/room/store";
-      console.log(this.current_user.id);
-      console.log(this.project.user_id);
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(url, {
         send_user_id: this.current_user.id,
         recieve_user_id: this.project.user_id
       }).then(function (res) {
-        console.log(res.data);
         location.href = "/dmroom/" + res.data.id;
       });
     }
@@ -2644,14 +2621,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/projects').then(function (res) {
-        console.log(res.data);
         _this.projects = res.data;
       }).catch(function (error) {
         alert('データの取得に失敗しました。');
       });
     },
     sortProjectByType: function sortProjectByType(value) {
-      console.log('bbb');
       if (this.filter == 2) {
         return true;
       } else if (value == this.filter) {
@@ -2724,7 +2699,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           user_id: this.user.id
         }
       }).then(function (res) {
-        console.log(res.data);
         _this.projects = res.data;
       });
     }
@@ -2788,7 +2762,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getMessagedProjects: function getMessagedProjects() {
       var _this = this;
 
-      console.log(this.user.id);
       var url = "/api/project/messaged";
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
         params: {
@@ -44848,6 +44821,10 @@ var render = function() {
     "section",
     { staticClass: "p-dmroom" },
     [
+      _c("div", { staticClass: "p-dmroom__partner" }, [
+        _vm._v(_vm._s(_vm.partnerName))
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.messages, function(message) {
         return _c(
           "div",
@@ -45189,7 +45166,6 @@ var render = function() {
       "div",
       { staticClass: "p-pjapplied__wrapper" },
       [
-        _vm._v("\n    " + _vm._s(_vm.projects) + "\n  "),
         _c("h1", [_vm._v("申し込み案件一覧")]),
         _vm._v(" "),
         _vm._l(_vm.projects, function(project) {

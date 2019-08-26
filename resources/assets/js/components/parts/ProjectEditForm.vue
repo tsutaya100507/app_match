@@ -66,10 +66,6 @@ export default {
       })
     },
     submitData: function() {
-      console.log(this.formData.title)
-      console.log(this.formData.content)
-      console.log(this.formData.type)
-      console.log(this.project.id)
       const data = {
         id: this.project.id,
         title: this.formData.title,

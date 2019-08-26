@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
-    // 案件と一緒にユーザーの情報を返すapi
+    // 案件と一緒にユーザーの情報を取得
     public function index()
     {
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
@@ -32,8 +32,7 @@ class ProjectController extends Controller
     // 案件の更新
     public function update(Request $request)
     {
-        \Log::info($request->title);
-        \Log::info($request);
+        
         $project = Project::find($request->id);
         $project->title = $request->title;
         $project->type = $request->type;
@@ -41,8 +40,6 @@ class ProjectController extends Controller
         $project->upper_price = $request->upper_price;
         $project->description = $request->description;
         $project->update();
-
-        \Log::info($project);
 
         return response($project, 201);
     }
@@ -61,7 +58,6 @@ class ProjectController extends Controller
                                     'projects.created_at')
                            ->orderBy('created_at', 'desc')
                            ->get();
-        \Log::info($projects);
 
         return response($projects, 201);
     }
@@ -69,7 +65,6 @@ class ProjectController extends Controller
     // パブリックメッセージを投稿した案件の情報を返すapi
     public function getMessagedProjects(Request $request)
     {
-        \Log::info($request);
         $projects = Project::join('messages', 'messages.project_id', '=', 'projects.id')
                            ->join('users', 'projects.user_id', 'users.id')
                            ->where('messages.user_id', $request->user_id)
@@ -82,7 +77,6 @@ class ProjectController extends Controller
                                     'users.name')
                            ->get()
                            ->unique();
-        \Log::info($projects);
         
         // 取得した案件レコードに紐づく最新のパブリックメッセージを追加して新たな配列を作成。
         $new_projects = array();
@@ -96,9 +90,7 @@ class ProjectController extends Controller
 
             $project['message'] = $message->body;
             $project['user_name'] = $message->name;
-            \Log::info($project);
             array_push($new_projects, $project);
-            \Log::info($new_projects);
         }
         return $new_projects;
     }

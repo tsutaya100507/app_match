@@ -21,11 +21,6 @@ export default {
   props: [ 'user', 'rooms', 'edited_rooms'],
   components: {
     RoomCard, Sidebar
-  },
-  data() {
-    return {
-      
-    }
   }
 }
 </script>

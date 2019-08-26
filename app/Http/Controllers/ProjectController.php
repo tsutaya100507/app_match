@@ -18,7 +18,6 @@ class ProjectController extends Controller
     // 投稿詳細
     public function show($id)
     {
-        \Log::info($id);
         $project = Project::where('projects.id', $id)->join('users', 'projects.user_id', '=', 'users.id')
                         ->select('users.id as user_id','users.name','projects.title','projects.id','projects.type','projects.description')
                         ->get();
@@ -38,15 +37,12 @@ class ProjectController extends Controller
     {
         $user = Auth::user();
         
-        \Log::info(Auth::user());
         return view('project/create', ['user' => $user]);
     }
 
     // 新規保存
     public function store(Request $request)
     {
-        \Log::info('ログ出力テスト');
-        \Log::info($request->user_id);
         $project = new Project();
         $project->title = $request->title;
         $project->type = $request->type;
@@ -54,11 +50,8 @@ class ProjectController extends Controller
         $project->upper_price = $request->upper_price;
         $project->description = $request->description;
         $project->user_id = $request->user_id;
-        \Log::info($project);
         $project->save();
         response($project, 201);
-        // return redirect()->action('ProjectController@show', ['id' => 5]);;
-        // return view('project/store');
     }
 
     public function edit($id)

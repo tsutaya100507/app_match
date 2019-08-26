@@ -33,3 +33,10 @@
   white-space: pre-wrap;
   word-wrap:break-word;
 }
+
+@media(max-width: 580px) {
+  .p-pjdetail__btn {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -8366,7 +8366,7 @@ button.close {
   margin-right: 10px;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 1000px) {
   .c-pjcard__terms {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8600,6 +8600,9 @@ textarea {
         -ms-flex-direction: column;
             flex-direction: column;
   }
+  div {
+    margin-bottom: 10px;
+  }
 }
 
 .p-pjdetail {
@@ -8640,6 +8643,18 @@ textarea {
 .p-pjdetail__desc {
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+@media (max-width: 580px) {
+  .p-pjdetail__btn {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
 }
 
 .p-mypage {
@@ -8685,6 +8700,12 @@ textarea {
 
 .p-dmroom {
   padding: 20px;
+}
+
+.p-dmroom__partner {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .p-pjposted {
@@ -8737,6 +8758,12 @@ textarea {
   padding: 20px;
 }
 
+.p-dmroom__partner {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
 .p-auth__content {
   position: static;
 }
@@ -8746,7 +8773,7 @@ textarea {
 }
 
 .u-w100 {
-  width: 300px;
+  width: 250px;
 }
 
 .u-w200 {
