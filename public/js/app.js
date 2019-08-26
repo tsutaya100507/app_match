@@ -2308,7 +2308,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getAppliedProjects: function getAppliedProjects() {
       var _this = this;
 
-      console.log(this.user.id);
       var url = "/api/applications";
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url, {
         params: {
@@ -2361,6 +2360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_MessageCard__ = __webpack_require__("./resources/assets/js/components/parts/MessageCard.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_MessageCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_MessageCard__);
+//
 //
 //
 //
@@ -44974,7 +44974,9 @@ var render = function() {
       _c("dl", { staticClass: "p-pjdetail__note" }, [
         _c("dt", [_vm._v("案件タイプ")]),
         _vm._v(" "),
-        _c("dd", [_vm._v(_vm._s(_vm.project.type))])
+        _vm.project.type == 0
+          ? _c("dd", [_vm._v("レベニューシェア")])
+          : _c("dd", [_vm._v("単発案件")])
       ]),
       _vm._v(" "),
       _vm.isReward
@@ -45904,7 +45906,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    { staticClass: "c-pjform" },
     [
       _c("h1", [_vm._v("案件編集")]),
       _vm._v(" "),

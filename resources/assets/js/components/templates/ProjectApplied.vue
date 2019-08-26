@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     getAppliedProjects() {
-      console.log(this.user.id)
       const url = "/api/applications"
       axios.get(url, {
         params: {

@@ -8,7 +8,8 @@
     <div class="p-pjdetail__terms">
       <dl class="p-pjdetail__note">
         <dt>案件タイプ</dt>
-        <dd>{{project.type}}</dd>
+        <dd v-if="project.type == 0">レベニューシェア</dd>
+        <dd v-else>単発案件</dd>
       </dl>
       <dl class="p-pjdetail__note" v-if="isReward">
         <dt>報酬額</dt>
